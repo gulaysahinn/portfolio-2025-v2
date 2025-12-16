@@ -1,16 +1,17 @@
-# React + Vite
+🚀 Gülay Şahin - Personal Portfolio
+Bu proje, yeteneklerimi, projelerimi ve akademik geçmişimi sergilemek amacıyla modern web teknolojileri kullanılarak geliştirilmiş kişisel portfolyo web sitesidir.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🛠️ Kullanılan Teknolojiler (Tech Stack)
+Bu proje aşağıdaki teknolojiler ve kütüphaneler kullanılarak geliştirilmiştir:
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Core: React.js (Vite ile)
+Styling: Tailwind CSS
+Animations: Framer Motion & React Type Animation
+Icons: React Icons (FontAwesome, Simple Icons)
+Form Handling: EmailJS (Sunucusuz e-posta gönderimi için)
+✨ Özellikler
+✅ Tamamen Responsive Tasarım: Mobil, tablet ve masaüstü uyumlu.
+✅ Modern UI/UX: Glassmorphism efektleri ve yumuşak geçişler.
+✅ Animasyonlu Geçişler: Framer Motion ile zenginleştirilmiş sayfa etkileşimleri.
+✅ Scroll Spy: Sayfa kaydırıldıkça aktif menünün otomatik değişmesi.
+✅ İletişim Formu: Ziyaretçilerin doğrudan e-posta gönderebilmesi (EmailJS entegrasyonu).
