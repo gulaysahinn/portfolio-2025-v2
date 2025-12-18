@@ -34,7 +34,7 @@ const Hero = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400 to-purple-600 rounded-full blur-2xl opacity-60 animate-pulse -z-10 scale-110"></div>
             <img
-              src="src/assets/images/avatar.jpeg"
+              src="public/images/avatar.jpeg"
               alt="Avatar"
               className="relative w-40 h-40 md:w-48 md:h-48 rounded-full border-[6px] border-slate-900/80 overflow-hidden object-cover shadow-2xl ring-4 ring-cyan-400/30"
             />

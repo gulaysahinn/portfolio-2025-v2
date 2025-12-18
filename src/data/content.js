@@ -88,7 +88,7 @@ export const projects = [
     tags: ["Python", "Flask", "NLTK", "Seaborn", "NLP"],
     github: "https://github.com/gulaysahinn/sentiment-analysis-project",
     demo: null,
-    image: "src/assets/images/DuyguAnalizi.png",
+    image: "public/images/DuyguAnalizi.png",
     type: "web",
   },
   {
@@ -98,7 +98,7 @@ export const projects = [
     tags: ["Flutter", "Hive", "AI", "Security", "Dart"],
     github: "https://github.com/gulaysahinn/ai_PassVault",
     demo: null,
-    image: "src/assets/images/passvault.jpeg",
+    image: "public/images/passvault.jpeg",
     type: "mobile",
   },
   {
@@ -108,7 +108,7 @@ export const projects = [
     tags: ["React", "Electron", "Firebase", "Desktop"],
     github: "https://github.com",
     demo: null,
-    image: "src/assets/images/petklinik.png",
+    image: "public/images/petklinik.png",
     type: "web",
   },
   {
@@ -118,7 +118,7 @@ export const projects = [
     tags: ["Flutter", "Dart", "UX Design"],
     github: "https://github.com/gulaysahinn/-average-calculation-app",
     demo: null,
-    image: "src/assets/images/ortalama.png",
+    image: "public/images/ortalama.png",
     type: "mobile",
   },
   {
@@ -128,7 +128,7 @@ export const projects = [
     tags: ["C++", "Windows API", "Security", "GUI"],
     github: "https://github.com/gulaysahinn/USBLocker",
     demo: null,
-    image: "src/assets/images/usbBlocker.png",
+    image: "public/images/usbBlocker.png",
     type: "web",
   },
   {
@@ -138,7 +138,7 @@ export const projects = [
     tags: ["Flutter", "Dart", "Mobile"],
     github: "https://github.com/gulaysahinn/todo_app",
     demo: null,
-    image: "src/assets/images/TodoApp.png",
+    image: "public/images/TodoApp.png",
     type: "mobile",
   },
   {
@@ -148,7 +148,7 @@ export const projects = [
     tags: ["React", "CSS", "Frontend"],
     github: "https://github.com/gulaysahinn/donercim-ismail-usta-menu",
     demo: null,
-    image: "src/assets/images/menu.png",
+    image: "public/images/menu.png",
     type: "web",
   },
 ];
