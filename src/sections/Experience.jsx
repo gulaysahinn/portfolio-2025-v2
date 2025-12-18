@@ -10,7 +10,7 @@ const Experience = () => {
         {/* Başlık */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-            <span className="text-cyan-400">#</span>Deneyimlerim
+            Deneyimlerim
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Yazılım ve teknoloji alanında edindiğim profesyonel deneyimler
@@ -106,7 +106,7 @@ const Experience = () => {
                     📍{" "}
                     {exp.company.includes("Belediyesi")
                       ? "Tuzla, İstanbul"
-                      : "İstanbul"}
+                      : "Maltepe, İstanbul"}
                   </span>
                   <span>
                     ⏱️ {exp.date.includes("Ağustos") ? "2 Ay" : "2 Ay"}

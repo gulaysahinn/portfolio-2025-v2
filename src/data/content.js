@@ -88,7 +88,7 @@ export const projects = [
     tags: ["Python", "Flask", "NLTK", "Seaborn", "NLP"],
     github: "https://github.com/gulaysahinn/sentiment-analysis-project",
     demo: null,
-    image: "public/images/DuyguAnalizi.png",
+    image: "images/DuyguAnalizi.png",
     type: "web",
   },
   {
@@ -98,7 +98,7 @@ export const projects = [
     tags: ["Flutter", "Hive", "AI", "Security", "Dart"],
     github: "https://github.com/gulaysahinn/ai_PassVault",
     demo: null,
-    image: "public/images/passvault.jpeg",
+    image: "images/passvault.jpeg",
     type: "mobile",
   },
   {
@@ -108,7 +108,7 @@ export const projects = [
     tags: ["React", "Electron", "Firebase", "Desktop"],
     github: "https://github.com",
     demo: null,
-    image: "public/images/petklinik.png",
+    image: "images/petklinik.png",
     type: "web",
   },
   {
@@ -118,7 +118,7 @@ export const projects = [
     tags: ["Flutter", "Dart", "UX Design"],
     github: "https://github.com/gulaysahinn/-average-calculation-app",
     demo: null,
-    image: "public/images/ortalama.png",
+    image: "images/ortalama.png",
     type: "mobile",
   },
   {
@@ -128,7 +128,7 @@ export const projects = [
     tags: ["C++", "Windows API", "Security", "GUI"],
     github: "https://github.com/gulaysahinn/USBLocker",
     demo: null,
-    image: "public/images/usbBlocker.png",
+    image: "images/usbBlocker.png",
     type: "web",
   },
   {
@@ -138,7 +138,7 @@ export const projects = [
     tags: ["Flutter", "Dart", "Mobile"],
     github: "https://github.com/gulaysahinn/todo_app",
     demo: null,
-    image: "public/images/TodoApp.png",
+    image: "images/TodoApp.png",
     type: "mobile",
   },
   {
@@ -148,7 +148,7 @@ export const projects = [
     tags: ["React", "CSS", "Frontend"],
     github: "https://github.com/gulaysahinn/donercim-ismail-usta-menu",
     demo: null,
-    image: "public/images/menu.png",
+    image: "images/menu.png",
     type: "web",
   },
 ];
