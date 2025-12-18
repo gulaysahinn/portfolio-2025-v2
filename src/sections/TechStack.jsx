@@ -1,68 +1,108 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { skills } from "../data/content";
-// FaBrain ikonunu ekledik
+
+// 1. GEREKLİ İKONLAR (FaBrain EKLENDİ)
 import {
   FaPython,
   FaReact,
   FaJs,
-  FaGithub,
-  FaCode,
   FaDatabase,
-  FaBrain,
+  FaCode,
+  FaBrain, // <-- YENİ: Machine Learning için Beyin ikonu
 } from "react-icons/fa";
+
+// Mevcut Si ikonları (Çalışanlar)
 import {
+  SiTypescript,
   SiTailwindcss,
-  SiTensorflow,
   SiFlutter,
   SiMongodb,
+  SiFirebase,
+  SiTensorflow,
+  SiGithub,
 } from "react-icons/si";
 
-// İkon eşleştirmesi
-const iconMap = {
-  Python: <FaPython className="text-yellow-400" />,
-  "Machine Learning": <FaBrain className="text-pink-500" />, // <-- YENİ (Pembe Beyin İkonu)
-  TensorFlow: <SiTensorflow className="text-orange-500" />,
-  "React.js": <FaReact className="text-cyan-400" />,
-  Flutter: <SiFlutter className="text-blue-400" />,
-  "Tailwind CSS": <SiTailwindcss className="text-cyan-500" />,
-  JavaScript: <FaJs className="text-yellow-300" />,
-  MsSQL: <FaDatabase className="text-red-500" />,
-  MongoDB: <SiMongodb className="text-green-500" />,
-  "Git & GitHub": <FaGithub className="text-white" />,
-};
-
 const TechStack = () => {
+  // İkon Eşleştirme Haritası
+  const skillMap = {
+    // 1. DİLLER
+    Python: { icon: <FaPython />, color: "text-yellow-400" },
+    JavaScript: { icon: <FaJs />, color: "text-yellow-300" },
+    "C#": { icon: <FaCode />, color: "text-purple-500" },
+
+    // 2. FRONTEND & MOBILE
+    "React.js": { icon: <FaReact />, color: "text-cyan-400" },
+    TypeScript: { icon: <SiTypescript />, color: "text-blue-500" },
+    "Tailwind CSS": { icon: <SiTailwindcss />, color: "text-cyan-500" },
+    "Next.js": { icon: <FaCode />, color: "text-white" },
+    Flutter: { icon: <SiFlutter />, color: "text-blue-400" },
+
+    // 3. BACKEND & AI (GÜNCELLENDİ)
+    "Node.js": { icon: <FaJs />, color: "text-green-500" },
+
+    // DEĞİŞİKLİK BURADA:
+    "Machine Learning": { icon: <FaBrain />, color: "text-pink-500" }, // <-- ARTIK BEYİN İKONU VE PEMBE
+    TensorFlow: { icon: <SiTensorflow />, color: "text-orange-400" }, // <-- TENSORFLOW TURUNCU VE KENDİ LOGOSU
+
+    // 4. DATABASE & TOOLS
+    Oracle: { icon: <FaDatabase />, color: "text-red-600" },
+    MsSQL: { icon: <FaDatabase />, color: "text-red-500" },
+    MongoDB: { icon: <SiMongodb />, color: "text-green-500" },
+    Firebase: { icon: <SiFirebase />, color: "text-yellow-500" },
+    "Git & GitHub": { icon: <SiGithub />, color: "text-white" },
+  };
+
   return (
-    <section id="techstack" className="min-h-screen scroll-mt-[90px]">
-      <div className="container mx-auto px-6 md:px-12 max-w-6xl">
-        <motion.h2
+    <section id="techstack" className="py-20 scroll-mt-[90px]">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Başlık Alanı */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold font-mono text-center mb-16 text-white"
+          className="text-center mb-16"
         >
-          Teknolojiler & <span className="text-cyan-400">Yetenekler</span>
-        </motion.h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Teknoloji <span className="text-cyan-400">Yeteneklerim</span>
+          </h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            Projelerimde aktif olarak kullandığım diller, kütüphaneler ve
+            araçlar.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5, borderColor: "rgba(34, 211, 238, 0.5)" }}
-              className="bg-slate-800/50 p-6 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center gap-4 hover:shadow-[0_0_20px_-5px_rgba(34,211,238,0.2)] transition-all backdrop-blur-sm group"
-            >
-              <div className="text-5xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">
-                {iconMap[skill.name] || <FaCode className="text-gray-400" />}
-              </div>
-              <h3 className="text-slate-300 font-mono font-medium text-sm text-center">
-                {skill.name}
-              </h3>
-            </motion.div>
-          ))}
+        {/* Grid Alanı */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          {skills.map((skill, index) => {
+            // Eğer haritada yoksa varsayılan ikon ata
+            const currentSkill = skillMap[skill.name] || {
+              icon: <FaCode />,
+              color: "text-gray-400",
+            };
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ y: -5, scale: 1.05 }}
+                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-xl flex flex-col items-center justify-center gap-4 hover:border-cyan-400/30 hover:shadow-[0_0_20px_-5px_rgba(6,182,212,0.3)] transition-all group"
+              >
+                <div
+                  className={`text-4xl md:text-5xl ${currentSkill.color} drop-shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                >
+                  {currentSkill.icon}
+                </div>
+
+                <h3 className="text-slate-300 font-medium text-sm group-hover:text-white transition-colors text-center">
+                  {skill.name}
+                </h3>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -2,33 +2,82 @@
 
 export const personalInfo = {
   name: "Gülay ŞAHİN",
-  title: "Bilgisayar Mühendisliği Öğrencisi & Yazılım Geliştirici",
+  title:
+    "Frontend Developer | Yapay Zeka Geliştiricisi | Mobil Uygulama Geliştiricisi",
   description:
     "Karmaşık problemleri modern teknolojilerle çözmeyi seviyorum. Python ile yapay zeka, React ile modern arayüzler ve Flutter ile mobil uygulamalar geliştiriyorum.",
   github: "https://github.com/gulaysahinn",
   linkedin: "https://www.linkedin.com/in/gulaysahinn/",
   email: "mailto:gulaysahin171@gmail.com",
+  cvUrl: "public/cv.pdf",
 };
 
 export const navLinks = [
   { id: "home", title: "Ana Sayfa" },
   { id: "about", title: "Hakkımda" },
+  { id: "experience", title: "Deneyim" },
   { id: "techstack", title: "Teknolojiler" },
   { id: "projects", title: "Projeler" },
   { id: "contact", title: "İletişim" },
 ];
 
+// data/content.js
 export const skills = [
-  { name: "Python", level: "Advanced", category: "AI & Backend" },
-  { name: "Machine Learning", level: "Intermediate", category: "AI & Backend" },
-  { name: "TensorFlow", level: "Intermediate", category: "AI & Backend" },
-  { name: "React.js", level: "Advanced", category: "Frontend" },
-  { name: "Flutter", level: "Intermediate", category: "Mobile" },
-  { name: "Tailwind CSS", level: "Advanced", category: "Frontend" },
-  { name: "JavaScript", level: "Advanced", category: "Languages" },
-  { name: "MsSQL", level: "Intermediate", category: "Database" },
-  { name: "MongoDB", level: "Intermediate", category: "Database" },
-  { name: "Git & GitHub", level: "Intermediate", category: "Tools" },
+  // Programlama Dilleri
+  { name: "Python", level: "Advanced", category: "language" },
+  { name: "C#", level: "Intermediate", category: "language" },
+  { name: "JavaScript", level: "Advanced", category: "language" },
+
+  // Frontend
+  { name: "React.js", level: "Advanced", category: "frontend" },
+  { name: "Tailwind CSS", level: "Advanced", category: "frontend" },
+
+  // Mobil
+  { name: "Flutter", level: "Intermediate", category: "mobile" },
+
+  // AI & Machine Learning
+  { name: "Machine Learning", level: "Intermediate", category: "ai" },
+  { name: "TensorFlow", level: "Intermediate", category: "ai" },
+
+  // Database
+  { name: "Oracle", level: "Intermediate", category: "database" },
+  { name: "MsSQL", level: "Intermediate", category: "database" },
+  { name: "MongoDB", level: "Intermediate", category: "database" },
+
+  // Tools & DevOps
+  { name: "Git & GitHub", level: "Advanced", category: "tools" },
+
+  // Backend
+  { name: "Node.js", level: "Intermediate", category: "backend" },
+  { name: "Firebase", level: "Intermediate", category: "backend" },
+  { name: "TypeScript", level: "Intermediate", category: "language" },
+  { name: "Next.js", level: "Intermediate", category: "frontend" },
+];
+
+export const experience = [
+  {
+    id: 1,
+    role: "Yazılım Stajyeri",
+    company: "Apps Akademi Şirketi",
+    date: "Ağustos 2025 - Eylül 2025",
+    description:
+      "Oracel Sql Developer kullanarak full-stack web uygulamaları geliştirdim ve APEX ile çalıştım.",
+    technologies: [
+      "Oracle SQL Developer",
+      "APEX",
+      "Full-stack",
+      "Web Development",
+    ],
+  },
+  {
+    id: 2,
+    role: "Gönüllü Donanım ve Yazılım stajyeri",
+    company: "Tuzla Belediyesi Bilgi işlem Müdürlüğü",
+    date: "Temmuz 2025 - Ağustos 2025",
+    description:
+      "web tabanlı yazılım geliştirme ve donanım bakımı konularında deneyim kazandım.",
+    technologies: ["Web Development", "Hardware Maintenance", "IT Support"],
+  },
 ];
 
 export const projects = [

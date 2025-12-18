@@ -4,6 +4,8 @@ import About from "./sections/About";
 import TechStack from "./sections/TechStack";
 import Projects from "./sections/Projects";
 import Contact from "./sections/Contact";
+import Footer from "./layout/Footer";
+import Experience from "./sections/Experience";
 
 function App() {
   return (
@@ -11,9 +13,11 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Experience />
       <TechStack />
       <Projects />
       <Contact />
+      <Footer />
     </div>
   );
 }

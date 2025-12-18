@@ -1,20 +1,35 @@
+// src/sections/Projects.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import { projects } from "../data/content";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { Tilt } from "react-tilt"; // 1. TILT IMPORT EDİLDİ
 
 const Projects = () => {
+  // 2. TILT AYARLARI
+  const defaultOptions = {
+    reverse: false,
+    max: 15, // Dönme derecesi (Daha yüksek = daha çok döner)
+    perspective: 1000,
+    scale: 1.02, // Üzerine gelince biraz büyür
+    speed: 1000,
+    transition: true,
+    axis: null,
+    reset: true,
+    easing: "cubic-bezier(.03,.98,.52,.99)",
+  };
+
   return (
-    <section id="projects" className="min-h-screen scroll-mt-[90px]">
+    <section id="projects" className="min-h-screen scroll-mt-[90px] py-20">
       {" "}
-      {/* bg-transparent yaptık çünkü body'deki grid dokusu görünsün */}
+      {/* py-20 eklendi, üstten/alttan boşluk için */}
       <div className="container mx-auto px-6">
         {/* Başlık */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold font-mono text-center mb-16 text-white" // font-mono eklendi (Space Grotesk)
+          className="text-3xl md:text-4xl font-bold font-mono text-center mb-16 text-white"
         >
           Öne Çıkan <span className="text-cyan-400">Projelerim</span>
         </motion.h2>
@@ -26,86 +41,97 @@ const Projects = () => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
+              transition={{ delay: index * 0.1 }} // Biraz hızlandırdım
               viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              className="bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:border-cyan-400/50 hover:shadow-[0_0_30px_-5px_rgba(34,211,238,0.15)] transition-all duration-300 shadow-xl overflow-hidden group flex flex-col backdrop-blur-sm"
+              className="h-full" // 3. HİZALAMA İÇİN KRİTİK: Kartın grid hücresini doldurması için
             >
-              {/* --- AKILLI RESİM ALANI --- */}
-              <div className="h-48 overflow-hidden relative">
-                {project.type === "mobile" ? (
-                  // MOBİL GÖRÜNÜM
-                  <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-950 flex items-center justify-center p-4">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="h-full w-auto object-contain drop-shadow-2xl rounded transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                ) : (
-                  // WEB GÖRÜNÜMÜ
-                  <div className="w-full h-full relative">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    {/* Karartma perdesi */}
-                    <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/0 transition-colors duration-300"></div>
-                  </div>
-                )}
-              </div>
-              {/* ------------------------- */}
-
-              {/* İçerik Alanı */}
-              <div className="p-6 flex flex-col flex-grow">
-                {/* Başlık ve Linkler */}
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold font-mono text-slate-100 group-hover:text-cyan-400 transition-colors">
-                    {project.title}
-                  </h3>
-
-                  <div className="flex gap-3">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-slate-400 hover:text-white transition-colors"
-                      title="GitHub Kodları"
-                    >
-                      <FaGithub size={20} />
-                    </a>
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-slate-400 hover:text-white transition-colors"
-                        title="Canlı Proje"
-                      >
-                        <FaExternalLinkAlt size={18} />
-                      </a>
+              {/* 4. TILT SARMALAYICISI */}
+              <Tilt options={defaultOptions} className="h-full">
+                <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:border-cyan-400/50 hover:shadow-[0_0_30px_-5px_rgba(34,211,238,0.15)] transition-all duration-300 shadow-xl overflow-hidden group flex flex-col backdrop-blur-sm h-full">
+                  {" "}
+                  {/* h-full eklendi */}
+                  {/* --- AKILLI RESİM ALANI (Senin Kodun) --- */}
+                  <div className="h-48 overflow-hidden relative shrink-0">
+                    {" "}
+                    {/* shrink-0: Resim sıkışmasın */}
+                    {project.type === "mobile" ? (
+                      // MOBİL GÖRÜNÜM
+                      <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-950 flex items-center justify-center p-4">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="h-full w-auto object-contain drop-shadow-2xl rounded transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    ) : (
+                      // WEB GÖRÜNÜMÜ
+                      <div className="w-full h-full relative">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        {/* Karartma perdesi */}
+                        <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/0 transition-colors duration-300"></div>
+                      </div>
                     )}
                   </div>
-                </div>
+                  {/* ------------------------- */}
+                  {/* İçerik Alanı */}
+                  <div className="p-6 flex flex-col flex-grow">
+                    {" "}
+                    {/* flex-grow: Alt kısmı doldurur */}
+                    {/* Başlık ve Linkler */}
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="text-xl font-bold font-mono text-slate-100 group-hover:text-cyan-400 transition-colors">
+                        {project.title}
+                      </h3>
 
-                {/* Açıklama */}
-                <p className="text-slate-400 text-sm mb-6 leading-relaxed line-clamp-3 font-sans">
-                  {project.description}
-                </p>
-
-                {/* Etiketler */}
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="text-xs font-mono px-2 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                      <div className="flex gap-3">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-slate-400 hover:text-white transition-colors"
+                          title="GitHub Kodları"
+                        >
+                          <FaGithub size={20} />
+                        </a>
+                        {project.demo && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-slate-400 hover:text-white transition-colors"
+                            title="Canlı Proje"
+                          >
+                            <FaExternalLinkAlt size={18} />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    {/* Açıklama */}
+                    <p className="text-slate-400 text-sm mb-6 leading-relaxed line-clamp-3 font-sans flex-grow">
+                      {" "}
+                      {/* flex-grow eklendi */}
+                      {project.description}
+                    </p>
+                    {/* Etiketler */}
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {" "}
+                      {/* mt-auto: En alta yapıştırır */}
+                      {project.tags.map((tag, tagIndex) => (
+                        <span
+                          key={tagIndex}
+                          className="text-xs font-mono px-2 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Tilt>
             </motion.div>
           ))}
         </div>
