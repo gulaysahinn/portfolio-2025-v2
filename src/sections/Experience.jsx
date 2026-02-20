@@ -102,15 +102,8 @@ const Experience = () => {
 
                 {/* Alt Bilgi */}
                 <div className="mt-6 flex items-center justify-between text-sm text-gray-500">
-                  <span>
-                    📍{" "}
-                    {exp.company.includes("Belediyesi")
-                      ? "Tuzla, İstanbul"
-                      : "Maltepe, İstanbul"}
-                  </span>
-                  <span>
-                    ⏱️ {exp.date.includes("Ağustos") ? "2 Ay" : "2 Ay"}
-                  </span>
+                  <span>📍 {exp.location}</span>
+                  <span>⏱️ {exp.duration}</span>
                 </div>
               </div>
             </div>

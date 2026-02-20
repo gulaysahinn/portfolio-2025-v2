@@ -60,6 +60,8 @@ export const experience = [
     role: "Uygulama Geliştirme Stajyeri",
     company: "Balıkesir Üniversitesi Rektörlüğü Bilgi İşlem Daire Başkanlığı",
     date: "Şubat 2026 - Devam Ediyor",
+    location: "Çağış, Balıkesir",
+    duration: "Devam Ediyor",
     description:
       "Üniversite bilgi sistemlerinde uygulama geliştirme ve yazılım süreçlerine katkı sağlıyorum.",
     technologies: [
@@ -73,6 +75,8 @@ export const experience = [
     role: "Yazılım Stajyeri",
     company: "Apps Akademi Şirketi",
     date: "Ağustos 2025 - Eylül 2025",
+    location: "Maltepe, İstanbul",
+    duration: "2 Ay",
     description:
       "Oracel Sql Developer kullanarak full-stack web uygulamaları geliştirdim ve APEX ile çalıştım.",
     technologies: [
@@ -87,6 +91,8 @@ export const experience = [
     role: "Gönüllü Donanım ve Yazılım stajyeri",
     company: "Tuzla Belediyesi Bilgi işlem Müdürlüğü",
     date: "Temmuz 2025 - Ağustos 2025",
+    location: "Tuzla, İstanbul",
+    duration: "2 Ay",
     description:
       "web tabanlı yazılım geliştirme ve donanım bakımı konularında deneyim kazandım.",
     technologies: ["Web Development", "Hardware Maintenance", "IT Support"],
