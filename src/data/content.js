@@ -57,6 +57,19 @@ export const skills = [
 export const experience = [
   {
     id: 1,
+    role: "Uygulama Geliştirme Stajyeri",
+    company: "Balıkesir Üniversitesi Rektörlüğü Bilgi İşlem Daire Başkanlığı",
+    date: "Şubat 2026 - Devam Ediyor",
+    description:
+      "Üniversite bilgi sistemlerinde uygulama geliştirme ve yazılım süreçlerine katkı sağlıyorum.",
+    technologies: [
+      "Web Development",
+      "Database Management",
+      "Application Development",
+    ],
+  },
+  {
+    id: 2,
     role: "Yazılım Stajyeri",
     company: "Apps Akademi Şirketi",
     date: "Ağustos 2025 - Eylül 2025",
@@ -70,7 +83,7 @@ export const experience = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     role: "Gönüllü Donanım ve Yazılım stajyeri",
     company: "Tuzla Belediyesi Bilgi işlem Müdürlüğü",
     date: "Temmuz 2025 - Ağustos 2025",
