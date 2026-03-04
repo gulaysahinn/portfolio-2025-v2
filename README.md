@@ -21,6 +21,7 @@ Bu proje aşağıdaki teknolojiler ve kütüphaneler kullanılarak geliştirilmi
 - ✅ **İletişim Formu**: Ziyaretçilerin doğrudan e-posta gönderebilmesi (EmailJS entegrasyonu)
 - ✅ **SEO Optimized**: Meta taglar, Open Graph ve Twitter Card desteği
 - ✅ **Performance**: Lazy loading, code splitting ve optimize edilmiş build
+- ✅ **Dinamik Proje Galerisi**: Öne çıkan projeler ve detaylı proje sayfaları
 
 ## 🚀 Kurulum
 
@@ -71,6 +72,23 @@ Tarayıcınızda `http://localhost:5173` adresini açın.
 npm run build
 npm run preview
 ```
+
+## 🌟 Öne Çıkan Projeler
+
+Portfolyoda sergilenen öne çıkan projeler:
+
+### 1. **Resonix AI** - Yapay Zeka Destekli Sunum Koçu
+
+- Beden dili, göz teması ve hitabet analizi
+- Computer Vision ve Machine Learning teknolojileri
+- React ve Python tabanlı full-stack uygulama
+
+### 2. **İstanbul Konut Fiyat Tahmin Sistemi** - ML Tabanlı Fiyat Tahmini
+
+- İstanbul'daki konut fiyatlarını tahmin eden makine öğrenmesi projesi
+- Scikit-learn, Pandas ve NumPy ile geliştirilmiş regresyon modelleri
+- Veri analizi ve görselleştirme ile kapsamlı raporlama
+- GitHub: [istanbul_konut_fiyat_tahmin](https://github.com/gulaysahinn/istanbul_konut_fiyat_tahmin)
 
 ## 📁 Proje Yapısı
 

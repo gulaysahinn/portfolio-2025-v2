@@ -118,6 +118,24 @@ export const projects = [
     featured: true,
   },
   {
+    title: "İstanbul Konut Fiyat Tahmin Sistemi",
+    description:
+      "İstanbul'daki konut fiyatlarını makine öğrenmesi algoritmaları ile tahmin eden kapsamlı bir yapay zeka projesi. Pandas, NumPy ve Scikit-learn kullanılarak geliştirilmiş regresyon modelleri ile konum, metrekare, oda sayısı gibi özelliklere göre fiyat tahmini yapar. Veri analizi ve görselleştirme için Matplotlib ve Seaborn kütüphaneleri kullanılmıştır.",
+    tags: [
+      "Python",
+      "Machine Learning",
+      "Scikit-learn",
+      "Pandas",
+      "Data Analysis",
+      "Regression",
+    ],
+    github: "https://github.com/gulaysahinn/istanbul_konut_fiyat_tahmin",
+    demo: null,
+    images: ["images/konut-1.png", "images/konut-2.png", "images/konut-3.png"],
+    type: "web",
+    featured: true,
+  },
+  {
     title: "Metinlerde Duygu Analizi",
     description:
       "Türkçe metinlerde duygu analizi yapan web tabanlı NLP uygulaması. Flask ve NLTK kullanılarak doğal dil işleme süreçleri uygulandı, Seaborn ile görselleştirildi.",
