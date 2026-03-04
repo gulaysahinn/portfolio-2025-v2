@@ -6,12 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     // Production optimizasyonları
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true, // Production'da console.log'ları kaldır
-      },
-    },
+    minify: 'esbuild', // Vite'nin varsayılan ve daha hızlı minifier'ı
     rollupOptions: {
       output: {
         manualChunks: {
