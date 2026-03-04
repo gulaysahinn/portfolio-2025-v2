@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { projects } from "../data/content";
-import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {
+  FaGithub,
+  FaExternalLinkAlt,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 
 // NOT: Tilt kütüphanesini kaldırdık, artık saf CSS/React kullanıyoruz.
 
@@ -33,7 +38,9 @@ const Projects = () => {
 const ProjectCard = ({ project, index }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const hasMultipleImages = project.images && project.images.length > 1;
-  const displayImage = project.images ? project.images[currentImageIndex] : project.image;
+  const displayImage = project.images
+    ? project.images[currentImageIndex]
+    : project.image;
 
   const nextImage = (e) => {
     e.preventDefault();
@@ -48,7 +55,7 @@ const ProjectCard = ({ project, index }) => {
     e.stopPropagation();
     if (hasMultipleImages) {
       setCurrentImageIndex((prev) =>
-        prev === 0 ? project.images.length - 1 : prev - 1
+        prev === 0 ? project.images.length - 1 : prev - 1,
       );
     }
   };
@@ -84,7 +91,7 @@ const ProjectCard = ({ project, index }) => {
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/0 transition-colors duration-300"></div>
-              
+
               {/* Çoklu Resim Kontrolü */}
               {hasMultipleImages && (
                 <>
@@ -103,7 +110,7 @@ const ProjectCard = ({ project, index }) => {
                   >
                     <FaChevronRight size={16} />
                   </button>
-                  
+
                   {/* Resim Göstergeleri (Dots) */}
                   <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
                     {project.images.map((_, idx) => (

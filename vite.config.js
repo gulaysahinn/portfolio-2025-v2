@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     // Production optimizasyonları
-    minify: 'terser',
+    minify: "terser",
     terserOptions: {
       compress: {
         drop_console: true, // Production'da console.log'ları kaldır
@@ -16,8 +16,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Büyük kütüphaneleri ayrı chunk'lara ayır
-          'framer-motion': ['framer-motion'],
-          'react-vendor': ['react', 'react-dom'],
+          "framer-motion": ["framer-motion"],
+          "react-vendor": ["react", "react-dom"],
         },
       },
     },
