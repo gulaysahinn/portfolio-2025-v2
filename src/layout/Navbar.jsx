@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  FaBars,
-  FaTimes,
-  FaGithub,
-  FaLinkedin,
-  FaFileDownload,
-} from "react-icons/fa";
+import { FaBars, FaTimes, FaFileDownload } from "react-icons/fa";
 import { navLinks, personalInfo } from "../data/content";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -130,25 +124,6 @@ const Navbar = () => {
                 <FaFileDownload size={14} />
                 <span>CV İndir</span>
               </button>
-
-              <div className="flex gap-3">
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  <FaGithub size={18} />
-                </a>
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-cyan-400 transition-colors"
-                >
-                  <FaLinkedin size={18} />
-                </a>
-              </div>
             </div>
           )}
 
@@ -217,38 +192,12 @@ const Navbar = () => {
                   </button>
                 </motion.div>
 
-                {/* Social Icons */}
-                <motion.div
-                  variants={itemVariants}
-                  initial="closed"
-                  animate="open"
-                  transition={{ delay: (navLinks.length + 1) * 0.1 }}
-                  className="pt-10 flex justify-center gap-8"
-                >
-                  <a
-                    href={personalInfo.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 bg-slate-800/70 rounded-full hover:bg-slate-700/70 transition-colors hover:scale-110"
-                  >
-                    <FaGithub size={24} className="text-white" />
-                  </a>
-                  <a
-                    href={personalInfo.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 bg-slate-800/70 rounded-full hover:bg-slate-700/70 transition-colors hover:scale-110"
-                  >
-                    <FaLinkedin size={24} className="text-white" />
-                  </a>
-                </motion.div>
-
                 {/* Kapatma Butonu */}
                 <motion.div
                   variants={itemVariants}
                   initial="closed"
                   animate="open"
-                  transition={{ delay: (navLinks.length + 2) * 0.1 }}
+                  transition={{ delay: (navLinks.length + 1) * 0.1 }}
                   className="pt-10 flex justify-center"
                 >
                   <button

@@ -9,7 +9,7 @@ export const personalInfo = {
   github: "https://github.com/gulaysahinn",
   linkedin: "https://www.linkedin.com/in/gulaysahinn/",
   email: "mailto:gulaysahin171@gmail.com",
-  cvUrl: "public/cv.pdf",
+  cvUrl: "/cv.pdf",
 };
 
 export const navLinks = [
@@ -27,6 +27,7 @@ export const skills = [
   { name: "Python", level: "Advanced", category: "language" },
   { name: "C#", level: "Intermediate", category: "language" },
   { name: "JavaScript", level: "Advanced", category: "language" },
+  { name: "PHP", level: "Intermediate", category: "language" },
 
   // Frontend
   { name: "React.js", level: "Advanced", category: "frontend" },
@@ -42,6 +43,7 @@ export const skills = [
   // Database
   { name: "Oracle", level: "Intermediate", category: "database" },
   { name: "MsSQL", level: "Intermediate", category: "database" },
+  { name: "MySQL", level: "Intermediate", category: "database" },
   { name: "MongoDB", level: "Intermediate", category: "database" },
 
   // Tools & DevOps
@@ -78,7 +80,7 @@ export const experience = [
     location: "Maltepe, İstanbul",
     duration: "2 Ay",
     description:
-      "Oracel Sql Developer kullanarak full-stack web uygulamaları geliştirdim ve APEX ile çalıştım.",
+      "Oracle SQL Developer kullanarak full-stack web uygulamaları geliştirdim ve APEX ile çalıştım.",
     technologies: [
       "Oracle SQL Developer",
       "APEX",
@@ -100,6 +102,21 @@ export const experience = [
 ];
 
 export const projects = [
+  {
+    title: "Resonix AI",
+    description:
+      "Resonix AI, yapay zeka gücüyle beden dilinizi, göz temasınızı ve hitabetinizi saniyeler içinde analiz eden kişisel sunum koçunuzdur. Sahnede veya kamera karşısında en özgüvenli halinizi sergileyip izleyicileri etkilemek için ihtiyacınız olan tüm profesyonel geri bildirimler artık tek bir platformda!",
+    tags: ["AI", "React", "Machine Learning", "Python", "Computer Vision"],
+    github: "https://github.com/gulaysahinn/resonix_ai",
+    demo: null,
+    images: [
+      "images/resonix-1.png",
+      "images/resonix-2.png",
+      "images/resonix-3.png",
+    ],
+    type: "web",
+    featured: true,
+  },
   {
     title: "Metinlerde Duygu Analizi",
     description:

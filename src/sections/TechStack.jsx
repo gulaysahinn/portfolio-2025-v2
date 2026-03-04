@@ -10,6 +10,7 @@ import {
   FaDatabase,
   FaCode,
   FaBrain, // <-- YENİ: Machine Learning için Beyin ikonu
+  FaPhp,
 } from "react-icons/fa";
 
 // Mevcut Si ikonları (Çalışanlar)
@@ -21,6 +22,7 @@ import {
   SiFirebase,
   SiTensorflow,
   SiGithub,
+  SiMysql,
 } from "react-icons/si";
 
 const TechStack = () => {
@@ -30,6 +32,7 @@ const TechStack = () => {
     Python: { icon: <FaPython />, color: "text-yellow-400" },
     JavaScript: { icon: <FaJs />, color: "text-yellow-300" },
     "C#": { icon: <FaCode />, color: "text-purple-500" },
+    PHP: { icon: <FaPhp />, color: "text-indigo-400" },
 
     // 2. FRONTEND & MOBILE
     "React.js": { icon: <FaReact />, color: "text-cyan-400" },
@@ -48,6 +51,7 @@ const TechStack = () => {
     // 4. DATABASE & TOOLS
     Oracle: { icon: <FaDatabase />, color: "text-red-600" },
     MsSQL: { icon: <FaDatabase />, color: "text-red-500" },
+    MySQL: { icon: <SiMysql />, color: "text-blue-400" },
     MongoDB: { icon: <SiMongodb />, color: "text-green-500" },
     Firebase: { icon: <SiFirebase />, color: "text-yellow-500" },
     "Git & GitHub": { icon: <SiGithub />, color: "text-white" },

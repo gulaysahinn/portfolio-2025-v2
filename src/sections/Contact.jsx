@@ -36,7 +36,7 @@ const Contact = () => {
         setLoading(false);
         setStatus("error");
         setTimeout(() => setStatus(null), 5000);
-      }
+      },
     );
   };
 
@@ -62,12 +62,12 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full lg:w-5/12 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-lg relative overflow-hidden"
+            className="w-full lg:w-1/2 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-lg relative overflow-hidden flex flex-col"
           >
             <div className="absolute top-0 right-0 w-20 h-20 bg-cyan-500/10 rounded-bl-full"></div>
 
@@ -75,7 +75,7 @@ const Contact = () => {
               İletişim Bilgileri
             </h3>
 
-            <div className="space-y-8">
+            <div className="space-y-8 flex-grow">
               {/* Email */}
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-slate-800 rounded-lg text-cyan-400 shrink-0">
@@ -119,17 +119,14 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* SAĞ TARAF (Form):
-             Eskiden: lg:w-2/3 (%66)
-             Şimdi:   lg:w-7/12 (%58) - Sol taraf genişlediği için burayı orantılı küçülttük.
-          */}
+          {/* SAĞ TARAF (Form) */}
           <motion.form
             ref={form}
             onSubmit={sendEmail}
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full lg:w-7/12 bg-slate-900 p-8 md:p-10 rounded-2xl border border-slate-800 shadow-lg"
+            className="w-full lg:w-1/2 bg-slate-900 p-8 md:p-10 rounded-2xl border border-slate-800 shadow-lg flex flex-col"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="flex flex-col gap-2">
@@ -159,7 +156,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 mb-8">
+            <div className="flex flex-col gap-2 mb-8 flex-grow">
               <label className="text-slate-400 text-sm font-medium ml-1">
                 Mesajınız
               </label>
@@ -167,7 +164,7 @@ const Contact = () => {
                 name="message"
                 required
                 rows="5"
-                className="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all resize-none"
+                className="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all resize-none flex-grow"
                 placeholder="Projenizden bahsedin veya sadece merhaba deyin..."
               ></textarea>
             </div>
