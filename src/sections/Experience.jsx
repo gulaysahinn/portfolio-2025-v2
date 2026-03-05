@@ -1,5 +1,6 @@
 // components/Experience.jsx
 import React from "react";
+import { motion } from "framer-motion";
 import { experience } from "../data/content";
 import { FaCalendarAlt, FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
 
@@ -20,11 +21,13 @@ const Experience = () => {
         {/* Deneyim Kartları */}
         <div className="space-y-8">
           {experience.map((exp, index) => (
-            <div
+            <motion.div
               key={exp.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
               className="relative group"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
             >
               {/* Timeline Çizgisi - Sadece ara bağlantılar için */}
               {index < experience.length - 1 && (
@@ -106,7 +109,7 @@ const Experience = () => {
                   <span>⏱️ {exp.duration}</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

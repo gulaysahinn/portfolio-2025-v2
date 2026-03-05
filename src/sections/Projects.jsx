@@ -6,6 +6,7 @@ import {
   FaExternalLinkAlt,
   FaChevronLeft,
   FaChevronRight,
+  FaLock,
 } from "react-icons/fa";
 
 // NOT: Tilt kütüphanesini kaldırdık, artık saf CSS/React kullanıyoruz.
@@ -143,16 +144,23 @@ const ProjectCard = ({ project, index }) => {
               {project.title}
             </h3>
 
-            <div className="flex gap-3">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noreferrer"
-                className="text-slate-400 hover:text-white transition-colors"
-                title="GitHub Kodları"
-              >
-                <FaGithub size={20} />
-              </a>
+            <div className="flex gap-3 items-center">
+              {project.isPrivate && (
+                <span className="flex items-center gap-1 text-xs font-mono px-2 py-1 rounded bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                  <FaLock size={10} /> Private
+                </span>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors"
+                  title="GitHub Kodları"
+                >
+                  <FaGithub size={20} />
+                </a>
+              )}
               {project.demo && (
                 <a
                   href={project.demo}

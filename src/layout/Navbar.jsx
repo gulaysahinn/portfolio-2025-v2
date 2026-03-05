@@ -57,8 +57,13 @@ const Navbar = () => {
 
   const handleDownloadCV = () => {
     setIsOpen(false);
-    const cvUrl = personalInfo.cvUrl || "/cv.pdf";
-    window.open(cvUrl, "_blank");
+    const cvUrl = personalInfo.cvUrl || "/Gulay_SAHIN_CV.pdf";
+    const link = document.createElement("a");
+    link.href = cvUrl;
+    link.download = "Gulay_SAHIN_CV.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const menuVariants = {

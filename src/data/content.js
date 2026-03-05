@@ -3,13 +3,13 @@
 export const personalInfo = {
   name: "Gülay ŞAHİN",
   title:
-    "Frontend Developer | Yapay Zeka Geliştiricisi | Mobil Uygulama Geliştiricisi",
+    "Bilgisayar Mühendisi | Yapay Zeka Geliştiricisi | Full-Stack Developer",
   description:
-    "Karmaşık problemleri modern teknolojilerle çözmeyi seviyorum. Python ile yapay zeka, React ile modern arayüzler ve Flutter ile mobil uygulamalar geliştiriyorum.",
+    "Bilgisayar Mühendisliği eğitimimle karmaşık problemlere mühendislik yaklaşımıyla çözümler üretiyorum. Python ile yapay zeka, React ile modern arayüzler ve Flutter ile mobil uygulamalar geliştiriyorum.",
   github: "https://github.com/gulaysahinn",
   linkedin: "https://www.linkedin.com/in/gulaysahinn/",
   email: "mailto:gulaysahin171@gmail.com",
-  cvUrl: "/cv.pdf",
+  cvUrl: "/Gulay_SAHIN_CV.pdf",
 };
 
 export const navLinks = [
@@ -96,7 +96,7 @@ export const experience = [
     location: "Tuzla, İstanbul",
     duration: "2 Ay",
     description:
-      "web tabanlı yazılım geliştirme ve donanım bakımı konularında deneyim kazandım.",
+      "Web tabanlı yazılım geliştirme ve donanım bakımı konularında deneyim kazandım.",
     technologies: ["Web Development", "Hardware Maintenance", "IT Support"],
   },
 ];
@@ -107,7 +107,8 @@ export const projects = [
     description:
       "Resonix AI, yapay zeka gücüyle beden dilinizi, göz temasınızı ve hitabetinizi saniyeler içinde analiz eden kişisel sunum koçunuzdur. Sahnede veya kamera karşısında en özgüvenli halinizi sergileyip izleyicileri etkilemek için ihtiyacınız olan tüm profesyonel geri bildirimler artık tek bir platformda!",
     tags: ["AI", "React", "Machine Learning", "Python", "Computer Vision"],
-    github: "https://github.com/gulaysahinn/resonix_ai",
+    github: null,
+    isPrivate: true,
     demo: null,
     images: [
       "images/resonix-1.png",
@@ -150,20 +151,11 @@ export const projects = [
     description:
       "Cyberpunk tasarımlı, yapay zeka destekli ve güvenli parola yöneticisi. Verileri yerel şifreleme ile korur.",
     tags: ["Flutter", "Hive", "AI", "Security", "Dart"],
-    github: "https://github.com/gulaysahinn/ai_PassVault",
+    github: null,
+    isPrivate: true,
     demo: null,
     image: "images/passvault.jpeg",
     type: "mobile",
-  },
-  {
-    title: "Pet Klinik Takip Sistemi",
-    description:
-      "Veteriner klinikleri için hasta takibini dijitalleştiren masaüstü uygulaması. Gerçek zamanlı veri akışı sağlar.",
-    tags: ["React", "Electron", "Firebase", "Desktop"],
-    github: "https://github.com",
-    demo: null,
-    image: "images/petklinik.png",
-    type: "web",
   },
   {
     title: "Not Ortalaması Hesapla",
