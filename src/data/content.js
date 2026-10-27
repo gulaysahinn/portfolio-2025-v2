@@ -21,7 +21,6 @@ export const navLinks = [
   { id: "contact", title: "İletişim" },
 ];
 
-// data/content.js
 export const skills = [
   // Programlama Dilleri
   { name: "Python", level: "Advanced", category: "language" },
@@ -105,7 +104,7 @@ export const projects = [
   {
     title: "Resonix AI",
     description:
-      "Resonix AI, yapay zeka gücüyle beden dilinizi, göz temasınızı ve hitabetinizi saniyeler içinde analiz eden kişisel sunum koçunuzdur. Sahnede veya kamera karşısında en özgüvenli halinizi sergileyip izleyicileri etkilemek için ihtiyacınız olan tüm profesyonel geri bildirimler artık tek bir platformda!",
+      "Kamera karşısında yapılan sunumu gerçek zamanlı analiz eden kişisel sunum koçu. Göz odağı, ses tekrarı ve duruş gibi ölçümler ile değerlendirme yapar; geçmiş oturum verileriyle bağlam kuran bir chatbot ile derinlemesine analiz sohbeti sunar.",
     tags: ["AI", "React", "Machine Learning", "Python", "Computer Vision"],
     github: null,
     isPrivate: true,
@@ -117,11 +116,23 @@ export const projects = [
     ],
     type: "web",
     featured: true,
+    // Görünmez katman: modelin gördüğü ham çıktı
+    modelLayer: {
+      pipeline: "CV Pipeline + LLM Chatbot",
+      metrics: [
+        { key: "eye_focus",          value: "0.73",  unit: "" },
+        { key: "voice_repetition",   value: "0.18",  unit: "" },
+        { key: "speech_rate",        value: "138",   unit: "wpm" },
+        { key: "posture_stability",  value: "0.91",  unit: "" },
+        { key: "session_history",    value: "true",  unit: "" },
+      ],
+      stack: ["OpenCV", "MediaPipe", "GPT-API", "React"],
+    },
   },
   {
     title: "İstanbul Konut Fiyat Tahmin Sistemi",
     description:
-      "İstanbul'daki konut fiyatlarını makine öğrenmesi algoritmaları ile tahmin eden kapsamlı bir yapay zeka projesi. Pandas, NumPy ve Scikit-learn kullanılarak geliştirilmiş regresyon modelleri ile konum, metrekare, oda sayısı gibi özelliklere göre fiyat tahmini yapar. Veri analizi ve görselleştirme için Matplotlib ve Seaborn kütüphaneleri kullanılmıştır.",
+      "İstanbul'daki konut fiyatlarını makine öğrenmesi algoritmaları ile tahmin eden yapay zeka projesi. Konum, metrekare ve oda sayısı gibi özelliklere göre fiyat tahmini yapar. En başarılı model 0.8897 R² skoru ile elde edildi.",
     tags: [
       "Python",
       "Machine Learning",
@@ -135,6 +146,19 @@ export const projects = [
     images: ["images/konut-1.png", "images/konut-2.png", "images/konut-3.png"],
     type: "web",
     featured: true,
+    modelLayer: {
+      pipeline: "Regression Pipeline",
+      metrics: [
+        { key: "best_model",         value: "Stacked (RF+GB)",  unit: "" },
+        { key: "R²_score",           value: "0.8897",           unit: "" },
+        { key: "approach",           value: "ensemble",         unit: "" },
+        { key: "feature_importance", value: "ilçe 0.38",        unit: "" },
+        { key: "feature_importance", value: "m² 0.29",          unit: "" },
+        { key: "feature_importance", value: "oda 0.19",         unit: "" },
+        { key: "dataset_size",       value: "15,000+",          unit: "listing" },
+      ],
+      stack: ["RandomForest", "GradientBoosting", "Scikit-learn", "Pandas"],
+    },
   },
   {
     title: "Metinlerde Duygu Analizi",
@@ -145,6 +169,17 @@ export const projects = [
     demo: null,
     image: "images/DuyguAnalizi.png",
     type: "web",
+    modelLayer: {
+      pipeline: "NLP Sentiment Pipeline",
+      metrics: [
+        { key: "sentiment",   value: "positive",  unit: "" },
+        { key: "pos_score",   value: "0.847",     unit: "" },
+        { key: "neg_score",   value: "0.031",     unit: "" },
+        { key: "neu_score",   value: "0.122",     unit: "" },
+        { key: "token_count", value: "127",       unit: "tokens" },
+      ],
+      stack: ["NLTK", "VADER", "Flask", "Seaborn"],
+    },
   },
   {
     title: "AI PassVault",
@@ -156,6 +191,16 @@ export const projects = [
     demo: null,
     image: "images/passvault.jpeg",
     type: "mobile",
+    modelLayer: {
+      pipeline: "Security Analysis",
+      metrics: [
+        { key: "encryption",    value: "AES-256",          unit: "" },
+        { key: "ai_strength",   value: "0.92",             unit: "" },
+        { key: "entropy_bits",  value: "84.3",             unit: "bits" },
+        { key: "storage",       value: "local_only",       unit: "" },
+      ],
+      stack: ["Flutter", "Hive", "Dart", "AES-256"],
+    },
   },
   {
     title: "Not Ortalaması Hesapla",
@@ -166,6 +211,16 @@ export const projects = [
     demo: null,
     image: "images/ortalama.png",
     type: "mobile",
+    modelLayer: {
+      pipeline: "Flutter Runtime",
+      metrics: [
+        { key: "state_mgmt",    value: "Provider",   unit: "" },
+        { key: "build_time",    value: "16",         unit: "ms" },
+        { key: "platform",      value: "Android+iOS", unit: "" },
+        { key: "widget_depth",  value: "7",          unit: "levels" },
+      ],
+      stack: ["Flutter", "Dart", "Provider"],
+    },
   },
   {
     title: "USB Engelleme Sistemi",
@@ -176,6 +231,16 @@ export const projects = [
     demo: null,
     image: "images/usbBlocker.png",
     type: "web",
+    modelLayer: {
+      pipeline: "System API",
+      metrics: [
+        { key: "api",               value: "SetupAPI",  unit: "" },
+        { key: "detection_latency", value: "<50",       unit: "ms" },
+        { key: "privilege_level",   value: "SYSTEM",    unit: "" },
+        { key: "hook_type",         value: "kernel",    unit: "" },
+      ],
+      stack: ["C++", "Win32 API", "SetupAPI"],
+    },
   },
   {
     title: "Todo App",
@@ -186,6 +251,15 @@ export const projects = [
     demo: null,
     image: "images/TodoApp.png",
     type: "mobile",
+    modelLayer: {
+      pipeline: "Flutter State",
+      metrics: [
+        { key: "ops_per_sec",  value: "1200",       unit: "ops/s" },
+        { key: "storage",      value: "SharedPrefs", unit: "" },
+        { key: "platform",     value: "Android+iOS", unit: "" },
+      ],
+      stack: ["Flutter", "Dart", "SharedPreferences"],
+    },
   },
   {
     title: "Restoran Menü",
@@ -196,5 +270,15 @@ export const projects = [
     demo: null,
     image: "images/menu.png",
     type: "web",
+    modelLayer: {
+      pipeline: "React Runtime",
+      metrics: [
+        { key: "components",   value: "12",    unit: "" },
+        { key: "load_time",    value: "1.2",   unit: "s" },
+        { key: "breakpoints",  value: "3",     unit: "" },
+        { key: "bundle_size",  value: "42",    unit: "KB" },
+      ],
+      stack: ["React", "CSS Modules", "Vite"],
+    },
   },
 ];

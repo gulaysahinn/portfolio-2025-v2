@@ -7,213 +7,200 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
-  // Ekran boyutunu kontrol et
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
-
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Scroll olayını dinle
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Mobil menü açıldığında scroll'u kilitle
+  // Aktif section takibi
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    const sections = navLinks.map(l => document.getElementById(l.id)).filter(Boolean);
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    sections.forEach(s => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "unset";
   }, [isOpen]);
 
-  const scrollToSection = (id) => {
+  const scrollToSection = id => {
     setIsOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
+    const el = document.getElementById(id);
+    if (el) {
       const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: "smooth" });
     }
   };
 
   const handleDownloadCV = () => {
     setIsOpen(false);
-    const cvUrl = personalInfo.cvUrl || "/Gulay_SAHIN_CV.pdf";
     const link = document.createElement("a");
-    link.href = cvUrl;
+    link.href = personalInfo.cvUrl || "/Gulay_SAHIN_CV.pdf";
     link.download = "Gulay_SAHIN_CV.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
-  const menuVariants = {
-    closed: {
-      opacity: 0,
-      scale: 0.95,
-      transition: { duration: 0.2 },
-    },
-    open: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.3 },
-    },
-  };
-
-  const itemVariants = {
-    closed: { opacity: 0, y: 10 },
-    open: { opacity: 1, y: 0 },
-  };
-
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full transition-all duration-300 ${
-          scrolled
-            ? "bg-slate-950/95 backdrop-blur-md shadow-lg py-2"
-            : "bg-slate-950/90 backdrop-blur-sm py-4"
-        } ${isOpen ? "z-[60]" : "z-50"}`}
+        className={`fixed top-0 left-0 w-full transition-all duration-300 ${isOpen ? "z-[60]" : "z-50"}`}
+        style={{
+          background: scrolled ? "rgba(9,9,15,0.92)" : "rgba(9,9,15,0.7)",
+          backdropFilter: "blur(12px)",
+          borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+          paddingTop: scrolled ? "8px" : "16px",
+          paddingBottom: scrolled ? "8px" : "16px",
+        }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-          {/* Logo */}
-          <div
-            onClick={() => scrollToSection("home")}
-            className="cursor-pointer flex items-center gap-1 font-mono text-xl font-bold"
-          >
-            <span className="text-cyan-400">&lt;</span>
-            <span className="text-white">Gülay</span>
-            <span className="text-cyan-400">/&gt;</span>
-          </div>
+        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center h-14">
 
-          {/* Desktop Menu */}
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection("home")}
+            className="flex items-center gap-1 font-mono text-lg font-bold transition-opacity hover:opacity-80"
+            id="nav-logo"
+          >
+            <span style={{ color: "var(--violet)" }}>&lt;</span>
+            <span style={{ color: "var(--ink)" }}>Gülay</span>
+            <span style={{ color: "var(--violet)" }}>/&gt;</span>
+          </button>
+
+          {/* Desktop nav */}
           {!isMobile && (
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-8">
               <ul className="flex gap-6">
-                {navLinks.map((link) => (
+                {navLinks.map(link => (
                   <li key={link.id}>
                     <button
                       onClick={() => scrollToSection(link.id)}
-                      className="text-sm text-white/80 hover:text-cyan-400 transition-colors py-1"
+                      className="text-sm transition-colors duration-200 relative py-1"
+                      style={{
+                        color: activeSection === link.id ? "var(--ink)" : "var(--ink-secondary)",
+                        fontWeight: activeSection === link.id ? "500" : "400",
+                      }}
+                      id={`nav-${link.id}`}
                     >
                       {link.title}
+                      {/* Aktif gösterge */}
+                      {activeSection === link.id && (
+                        <motion.span
+                          layoutId="nav-underline"
+                          className="absolute bottom-0 left-0 right-0 h-px"
+                          style={{ background: "var(--violet)" }}
+                        />
+                      )}
                     </button>
                   </li>
                 ))}
               </ul>
 
-              <div className="h-4 w-px bg-gray-700"></div>
+              <div className="w-px h-4" style={{ background: "var(--border)" }} />
 
               <button
                 onClick={handleDownloadCV}
-                className="flex items-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-white px-3 py-1.5 rounded-md text-sm font-medium transition-all"
+                className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                style={{
+                  background: "var(--violet)",
+                  color: "#fff",
+                }}
+                id="nav-cv-btn"
               >
-                <FaFileDownload size={14} />
-                <span>CV İndir</span>
+                <FaFileDownload size={13} />
+                CV İndir
               </button>
             </div>
           )}
 
-          {/* Mobile Menu Button */}
+          {/* Mobile hamburger */}
           {isMobile && (
             <button
-              className="text-white hover:text-cyan-400 transition-colors p-1 z-[70]"
+              className="p-1 z-[70] transition-colors duration-200"
+              style={{ color: isOpen ? "var(--violet)" : "var(--ink-secondary)" }}
               onClick={() => setIsOpen(!isOpen)}
-              aria-label="Menü"
+              aria-label="Menüyü aç/kapat"
+              id="nav-mobile-toggle"
             >
-              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>
           )}
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay - EN ÜSTTE OLMALI */}
+      {/* Mobile menu overlay */}
       <AnimatePresence>
         {isMobile && isOpen && (
           <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            className="fixed inset-0 z-[55] bg-slate-900/95 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[55]"
+            style={{ background: "rgba(9,9,15,0.97)", backdropFilter: "blur(16px)" }}
             onClick={() => setIsOpen(false)}
           >
-            {/* Menü İçeriği - Overlay'in ÜSTÜNDE */}
-            <div
-              className="absolute top-0 left-0 right-0 min-h-screen bg-slate-900 pt-20"
-              onClick={(e) => e.stopPropagation()}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="absolute top-0 right-0 h-full w-72 flex flex-col pt-20 px-8"
+              style={{ borderLeft: "1px solid var(--border)" }}
+              onClick={e => e.stopPropagation()}
             >
-              <div className="px-6 py-8 space-y-2">
-                {navLinks.map((link, index) => (
-                  <motion.div
+              <div className="flex flex-col gap-1">
+                {navLinks.map((link, i) => (
+                  <motion.button
                     key={link.id}
-                    variants={itemVariants}
-                    initial="closed"
-                    animate="open"
-                    transition={{ delay: index * 0.1 }}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.06 }}
+                    onClick={() => scrollToSection(link.id)}
+                    className="text-left py-3.5 px-4 rounded-lg text-lg font-medium transition-colors duration-200"
+                    style={{
+                      color: activeSection === link.id ? "var(--violet)" : "var(--ink-secondary)",
+                      background: activeSection === link.id ? "rgba(124,106,247,0.08)" : "transparent",
+                    }}
                   >
-                    <button
-                      onClick={() => scrollToSection(link.id)}
-                      className="w-full text-left py-4 px-4 text-xl text-white hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-colors flex items-center justify-between"
-                    >
-                      <span>{link.title}</span>
-                      <span className="text-cyan-400">→</span>
-                    </button>
-                  </motion.div>
+                    {link.title}
+                  </motion.button>
                 ))}
-
-                {/* CV Button in Mobile Menu */}
-                <motion.div
-                  variants={itemVariants}
-                  initial="closed"
-                  animate="open"
-                  transition={{ delay: navLinks.length * 0.1 }}
-                  className="pt-6"
-                >
-                  <button
-                    onClick={handleDownloadCV}
-                    className="w-full flex items-center justify-center gap-3 py-4 px-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl font-semibold text-lg transition-all active:scale-95"
-                  >
-                    <FaFileDownload size={20} />
-                    <span>CV İndir</span>
-                  </button>
-                </motion.div>
-
-                {/* Kapatma Butonu */}
-                <motion.div
-                  variants={itemVariants}
-                  initial="closed"
-                  animate="open"
-                  transition={{ delay: (navLinks.length + 1) * 0.1 }}
-                  className="pt-10 flex justify-center"
-                >
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="py-3 px-8 text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded-full transition-colors"
-                  >
-                    Kapat
-                  </button>
-                </motion.div>
               </div>
-            </div>
+
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                onClick={handleDownloadCV}
+                className="mt-8 flex items-center justify-center gap-2 py-3.5 rounded-xl font-medium text-sm"
+                style={{
+                  background: "var(--violet)",
+                  color: "#fff",
+                }}
+              >
+                <FaFileDownload size={14} />
+                CV İndir
+              </motion.button>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -7,201 +7,337 @@ import {
   FaExclamationCircle,
   FaEnvelope,
   FaMapMarkerAlt,
+  FaLinkedin,
+  FaGithub,
 } from "react-icons/fa";
 import { personalInfo } from "../data/content";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const inputStyle = {
+  background: "var(--bg-base)",
+  border: "1px solid var(--border)",
+  borderRadius: "10px",
+  padding: "14px 16px",
+  color: "var(--ink)",
+  fontSize: "14px",
+  width: "100%",
+  outline: "none",
+  transition: "border-color 0.2s",
+  fontFamily: "DM Sans, sans-serif",
+};
 
 const Contact = () => {
   const form = useRef();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
+  const [focused, setFocused] = useState(null);
 
-  const sendEmail = (e) => {
+  const sendEmail = e => {
     e.preventDefault();
     setLoading(true);
 
-    const serviceID = import.meta.env.VITE_SERVICE_ID;
-    const templateID = import.meta.env.VITE_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_PUBLIC_KEY;
-
-    emailjs.sendForm(serviceID, templateID, form.current, publicKey).then(
-      (result) => {
-        console.log(result.text);
-        setLoading(false);
-        setStatus("success");
-        e.target.reset();
-        setTimeout(() => setStatus(null), 5000);
-      },
-      (error) => {
-        console.log(error.text);
-        setLoading(false);
-        setStatus("error");
-        setTimeout(() => setStatus(null), 5000);
-      },
-    );
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        form.current,
+        import.meta.env.VITE_PUBLIC_KEY
+      )
+      .then(
+        () => {
+          setLoading(false);
+          setStatus("success");
+          e.target.reset();
+          setTimeout(() => setStatus(null), 5000);
+        },
+        () => {
+          setLoading(false);
+          setStatus("error");
+          setTimeout(() => setStatus(null), 5000);
+        }
+      );
   };
 
   return (
-    <section id="contact" className="min-h-screen scroll-mt-[90px]">
-      {/* Arka plan süslemesi */}
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-cyan-900/10 to-transparent pointer-events-none"></div>
+    <section id="contact" className="py-24 md:py-36 scroll-mt-[90px] relative">
+      <div className="container mx-auto px-6 max-w-5xl relative z-10">
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
-        {/* Başlık Alanı */}
+        {/* ── Section Header — Terminal Tag Pattern ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            İletişime <span className="text-cyan-400">Geç</span>
+          <div className="flex items-center gap-2 mb-3 font-mono text-xs" style={{ color: "var(--violet)" }}>
+            <span style={{ opacity: 0.6 }}>// 05. contact</span>
+            <span style={{ color: "var(--border)" }}>·</span>
+            <span className="px-2 py-0.5 rounded" style={{ background: "rgba(124,106,247,0.08)", border: "1px solid rgba(124,106,247,0.2)" }}>
+              $ ping -c 1 contact.io
+            </span>
+          </div>
+          <h2
+            className="font-display text-4xl md:text-5xl font-bold"
+            style={{ color: "var(--ink)" }}
+          >
+            İletişim &{" "}
+            <span style={{ color: "var(--violet)" }}>Bağlantı</span>
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto">
-            Benim ile iletişime geçmekten çekinmeyin! Sadece formu doldurun ve
-            en kısa sürede size geri döneceğim.
-          </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
+        <div className="flex flex-col lg:flex-row gap-8">
+
+          {/* Sol: İletişim bilgileri */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true }}
-            className="w-full lg:w-1/2 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-lg relative overflow-hidden flex flex-col"
+            transition={{ delay: 0.05 }}
+            className="lg:w-2/5 flex flex-col gap-5"
           >
-            <div className="absolute top-0 right-0 w-20 h-20 bg-cyan-500/10 rounded-bl-full"></div>
-
-            <h3 className="text-xl font-bold text-white mb-8">
-              İletişim Bilgileri
-            </h3>
-
-            <div className="space-y-8 flex-grow">
-              {/* Email */}
+            {/* Email kartı */}
+            <div
+              className="p-6 rounded-xl"
+              style={{
+                background: "var(--bg-surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-slate-800 rounded-lg text-cyan-400 shrink-0">
-                  <FaEnvelope size={20} />
+                <div
+                  className="p-2.5 rounded-lg"
+                  style={{ background: "rgba(124,106,247,0.1)", color: "var(--violet)" }}
+                >
+                  <FaEnvelope size={18} />
                 </div>
-                <div className="overflow-hidden">
-                  {" "}
-                  {/* Taşmayı engellemek için */}
-                  <p className="text-sm text-slate-500 mb-1 font-medium">
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-wider mb-1" style={{ color: "var(--ink-dim)" }}>
                     E-posta
                   </p>
-                  {/* DÜZELTME: 'break-all' kaldırıldı, font biraz büyütüldü */}
                   <a
                     href={personalInfo.email}
-                    className="text-slate-200 hover:text-cyan-400 transition-colors text-base md:text-lg font-medium whitespace-nowrap"
+                    className="text-sm font-medium transition-colors duration-200"
+                    style={{ color: "var(--ink-secondary)" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "var(--violet)")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "var(--ink-secondary)")}
                   >
                     {personalInfo.email.replace("mailto:", "")}
                   </a>
                 </div>
               </div>
+            </div>
 
-              {/* Konum */}
+            {/* Konum kartı */}
+            <div
+              className="p-6 rounded-xl"
+              style={{
+                background: "var(--bg-surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-slate-800 rounded-lg text-purple-400 shrink-0">
-                  <FaMapMarkerAlt size={20} />
+                <div
+                  className="p-2.5 rounded-lg"
+                  style={{ background: "rgba(169,152,255,0.1)", color: "#a998ff" }}
+                >
+                  <FaMapMarkerAlt size={18} />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500 mb-1 font-medium">
+                  <p className="font-mono text-xs uppercase tracking-wider mb-1" style={{ color: "var(--ink-dim)" }}>
                     Konum
                   </p>
-                  <p className="text-slate-200 text-base">İstanbul, Türkiye</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--ink-secondary)" }}>
+                    İstanbul, Türkiye
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-slate-800">
-              <p className="text-slate-500 text-sm">
-                Geri dönüş süresi: Genellikle{" "}
-                <span className="text-cyan-400">24 saat</span> içinde.
+            {/* Sosyal linkler */}
+            <div
+              className="p-6 rounded-xl"
+              style={{
+                background: "var(--bg-surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
+              <p className="font-mono text-xs uppercase tracking-wider mb-4" style={{ color: "var(--ink-dim)" }}>
+                Sosyal
               </p>
+              <div className="flex flex-col gap-3">
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-3 text-sm transition-colors duration-200"
+                  style={{ color: "var(--ink-secondary)" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "var(--ink)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "var(--ink-secondary)")}
+                >
+                  <FaGithub size={16} />
+                  github.com/gulaysahinn
+                </a>
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-3 text-sm transition-colors duration-200"
+                  style={{ color: "var(--ink-secondary)" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "var(--violet)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "var(--ink-secondary)")}
+                >
+                  <FaLinkedin size={16} />
+                  linkedin.com/in/gulaysahinn
+                </a>
+              </div>
             </div>
+
+            {/* Cevap süresi */}
+            <p className="text-xs font-mono" style={{ color: "var(--ink-dim)" }}>
+              Genellikle{" "}
+              <span style={{ color: "var(--violet)" }}>24 saat</span>{" "}
+              içinde geri dönerim.
+            </p>
           </motion.div>
 
-          {/* SAĞ TARAF (Form) */}
+          {/* Sağ: Form */}
           <motion.form
             ref={form}
             onSubmit={sendEmail}
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true }}
-            className="w-full lg:w-1/2 bg-slate-900 p-8 md:p-10 rounded-2xl border border-slate-800 shadow-lg flex flex-col"
+            transition={{ delay: 0.1 }}
+            className="lg:w-3/5 flex flex-col gap-5"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="flex flex-col gap-2">
-                <label className="text-slate-400 text-sm font-medium ml-1">
+                <label
+                  className="font-mono text-xs uppercase tracking-wider"
+                  style={{ color: "var(--ink-dim)" }}
+                >
                   İsim Soyisim
                 </label>
                 <input
                   type="text"
                   name="from_name"
                   required
-                  className="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
                   placeholder="Adınız Soyadınız"
+                  style={{
+                    ...inputStyle,
+                    borderColor: focused === "name" ? "var(--violet)" : "var(--border)",
+                    boxShadow: focused === "name" ? "0 0 0 3px rgba(124,106,247,0.12)" : "none",
+                  }}
+                  onFocus={() => setFocused("name")}
+                  onBlur={() => setFocused(null)}
+                  id="contact-name"
                 />
               </div>
-
               <div className="flex flex-col gap-2">
-                <label className="text-slate-400 text-sm font-medium ml-1">
-                  E-posta Adresi
+                <label
+                  className="font-mono text-xs uppercase tracking-wider"
+                  style={{ color: "var(--ink-dim)" }}
+                >
+                  E-posta
                 </label>
                 <input
                   type="email"
                   name="from_email"
                   required
-                  className="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
                   placeholder="ornek@email.com"
+                  style={{
+                    ...inputStyle,
+                    borderColor: focused === "email" ? "var(--violet)" : "var(--border)",
+                    boxShadow: focused === "email" ? "0 0 0 3px rgba(124,106,247,0.12)" : "none",
+                  }}
+                  onFocus={() => setFocused("email")}
+                  onBlur={() => setFocused(null)}
+                  id="contact-email"
                 />
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 mb-8 flex-grow">
-              <label className="text-slate-400 text-sm font-medium ml-1">
-                Mesajınız
+            <div className="flex flex-col gap-2 flex-grow">
+              <label
+                className="font-mono text-xs uppercase tracking-wider"
+                style={{ color: "var(--ink-dim)" }}
+              >
+                Mesaj
               </label>
               <textarea
                 name="message"
                 required
-                rows="5"
-                className="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all resize-none flex-grow"
+                rows="7"
                 placeholder="Projenizden bahsedin veya sadece merhaba deyin..."
-              ></textarea>
+                style={{
+                  ...inputStyle,
+                  resize: "none",
+                  borderColor: focused === "msg" ? "var(--violet)" : "var(--border)",
+                  boxShadow: focused === "msg" ? "0 0 0 3px rgba(124,106,247,0.12)" : "none",
+                }}
+                onFocus={() => setFocused("msg")}
+                onBlur={() => setFocused(null)}
+                id="contact-message"
+              />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-4 rounded-xl hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="flex items-center justify-center gap-2 font-medium py-4 rounded-xl transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
+              style={{
+                background: "var(--violet)",
+                color: "#fff",
+                boxShadow: "0 4px 24px -8px rgba(124,106,247,0.5)",
+              }}
+              id="contact-submit"
             >
               {loading ? (
                 <span className="animate-pulse">Gönderiliyor...</span>
               ) : (
                 <>
-                  <FaPaperPlane /> Mesajı Gönder
+                  <FaPaperPlane size={14} />
+                  Mesajı Gönder
                 </>
               )}
             </button>
 
             {status === "success" && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-6 p-4 bg-green-500/10 border border-green-500/20 rounded-xl text-green-400 flex items-center gap-3"
+                className="flex items-center gap-3 p-4 rounded-xl text-sm"
+                style={{
+                  background: "rgba(34,197,94,0.08)",
+                  border: "1px solid rgba(34,197,94,0.2)",
+                  color: "#4ade80",
+                }}
               >
-                <FaCheckCircle className="text-xl" />
-                <span>Mesajınız başarıyla gönderildi!</span>
+                <FaCheckCircle />
+                Mesajınız başarıyla gönderildi!
               </motion.div>
             )}
 
             {status === "error" && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 flex items-center gap-3"
+                className="flex items-center gap-3 p-4 rounded-xl text-sm"
+                style={{
+                  background: "rgba(239,68,68,0.08)",
+                  border: "1px solid rgba(239,68,68,0.2)",
+                  color: "#f87171",
+                }}
               >
-                <FaExclamationCircle className="text-xl" />
-                <span>Bir hata oluştu.</span>
+                <FaExclamationCircle />
+                Bir hata oluştu. Lütfen tekrar deneyin.
               </motion.div>
             )}
           </motion.form>

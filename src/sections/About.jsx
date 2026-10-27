@@ -1,147 +1,224 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaGraduationCap, FaCode, FaRocket } from "react-icons/fa";
+import { FaTerminal, FaLayerGroup, FaCube } from "react-icons/fa";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+};
+
+// Mühendislik Yolculuğu — Changelog formatında zaman çizelgesi
+const LOG_ENTRIES = [
+  {
+    year: "2021",
+    tag: "init",
+    title: "Kocaeli Üniversitesi",
+    detail: "Bilgisayar Programcılığı — Temel algoritmalar, C/C++ ve veri yapıları ile kodlama temelleri.",
+    active: false,
+  },
+  {
+    year: "2022",
+    tag: "transfer",
+    title: "Balıkesir Üniversitesi",
+    detail: "Bilgisayar Mühendisliği — Yazılım mimarisi, veritabanı yönetimi, veri bilimi ve kuramsal mühendislik temelleri.",
+    active: false,
+  },
+  {
+    year: "2024",
+    tag: "specialization",
+    title: "AI & Full-Stack Entegrasyonu",
+    detail: "Python ile makine öğrenmesi modelleri geliştirirken, React ve Flutter ile modelleri son kullanıcıya ulaştıran arayüzler kurmaya başladım.",
+    active: false,
+  },
+  {
+    year: "2026",
+    tag: "current",
+    title: "4. Sınıf Mühendislik Tezi & Staj",
+    detail: "Bilgi İşlem Daire Başkanlığı stajı ve görüntü işleme + LLM tabanlı Resonix AI bitirme projesi üzerinde aktif çalışma.",
+    active: true,
+  },
+];
+
+// Odak Alanları — Temiz Mühendislik Mimarisi
+const FOCUS_AREAS = [
+  {
+    code: "01",
+    name: "Veri & Model Mimarisi",
+    desc: "Python, Scikit-learn ve TensorFlow ile ham veriyi işleyip anlamlı tahmin ve sınıflandırma modellerine dönüştürme.",
+    techs: ["Python", "Machine Learning", "NLP", "Computer Vision"],
+  },
+  {
+    code: "02",
+    name: "Ürün & Arayüz Katmanı",
+    desc: "Karmaşık modellerin çıktılarını kullanıcı için sade, hızlı ve sezgisel web & mobil deneyimlerine çevirme.",
+    techs: ["React.js", "Flutter", "Tailwind CSS", "REST APIs"],
+  },
+  {
+    code: "03",
+    name: "Veri Tabanı & Sistem",
+    desc: "İlişkisel ve doküman tabanlı veritabanlarında veri modelleme, güvenli yerel depolama ve donanım seviyesi API entegrasyonu.",
+    techs: ["Oracle", "PostgreSQL / MySQL", "Hive / SQLite", "Win32 API"],
+  },
+];
 
 const About = () => {
-  const cards = [
-    {
-      icon: <FaGraduationCap />,
-      title: "Akademik Yolculuğum",
-      desc: (
-        <div className="flex flex-col gap-4 mt-2">
-          {/* 1. Okul */}
-          <div className="pl-3 border-l-2 border-cyan-500">
-            <h4 className="font-bold text-white text-base">
-              Bilgisayar Mühendisliği
-            </h4>
-            <p className="text-cyan-400 text-xs font-mono">
-              Balıkesir Üniversitesi
-            </p>
-            <p className="text-slate-500 text-xs">4. Sınıf • Devam Ediyor</p>
-          </div>
-          {/* 2. Okul */}
-          <div className="pl-3 border-l-2 border-slate-700">
-            <h4 className="font-bold text-slate-300 text-base">
-              Bilgisayar Programcılığı
-            </h4>
-            <p className="text-slate-400 text-xs font-mono">
-              Kocaeli Üniversitesi
-            </p>
-            <p className="text-slate-500 text-xs">2021 Mezun</p>
-          </div>
-        </div>
-      ),
-      color: "text-blue-400",
-      bg: "bg-blue-500/5",
-      border: "border-blue-500/20",
-    },
-    {
-      icon: <FaCode />,
-      title: "Kodlama Tutkum",
-      desc: "Sadece kod yazmıyor, problem çözüyorum. Python ve Yapay Zeka (AI) dünyasında derinleşirken, modern web teknolojileriyle kullanıcı dostu arayüzler tasarlıyorum.",
-      color: "text-purple-400",
-      bg: "bg-purple-500/5",
-      border: "border-purple-500/20",
-    },
-    {
-      icon: <FaRocket />,
-      title: "Gelecek Hedefim",
-      desc: "Teorik mühendislik bilgisini pratik saha tecrübesiyle harmanlayarak, insan hayatına dokunan ölçeklenebilir yapay zeka çözümleri üretmek.",
-      color: "text-pink-400",
-      bg: "bg-pink-500/5",
-      border: "border-pink-500/20",
-    },
-  ];
-
   return (
-    <section id="about" className="py-20 md:py-32 bg-transparent relative">
-      {/* ANA KAPSAYICI (CONTAINER) */}
-      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-        {/* İKİ SÜTUNLU YAPI (GRID) 
-            Mobilde tek sütun, Laptopta (lg) iki sütun.
-        */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* --- SOL TARAFI (METİN & KİŞİSEL BİLGİ) --- */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-5xl font-bold font-mono text-white mb-8 leading-tight">
-              Kodlamaya Olan <br />{" "}
-              <span className="text-cyan-400">Yolculuğum</span>
-            </h2>
+    <section id="about" className="py-24 md:py-36 relative scroll-mt-[90px]">
+      <div className="container mx-auto px-6 max-w-6xl">
 
-            <div className="space-y-6 text-slate-400 text-lg leading-relaxed font-sans">
-              <p>
-                Merhaba! Ben{" "}
-                <span className="text-cyan-400 font-bold">Gülay</span>. Yazılım
-                dünyasındaki serüvenim, temelleri sağlam atmakla başladı.
-              </p>
-              <p>
-                <strong className="text-white">Kocaeli Üniversitesi</strong>'nde
-                başladığım kodlama maceramı, şuan{" "}
-                <strong className="text-white">Balıkesir Üniversitesi</strong>{" "}
-                Bilgisayar Mühendisliği son sınıf öğrencisi olarak ileri
-                seviyeye taşıyorum.
-              </p>
-              <p className="border-l-4 border-cyan-500 pl-4 italic text-slate-500 bg-slate-900/30 py-2 rounded-r-lg">
-                "Benim için yazılım, siyah bir ekrana renkli kodlar yazmaktan
-                fazlası; gerçek dünya problemlerine akılcı çözümler üretme
-                sanatıdır."
-              </p>
+        {/* ── Section Header — Terminal Tag Pattern ── */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="mb-14"
+        >
+          <div className="flex items-center gap-2 mb-3 font-mono text-xs" style={{ color: "var(--violet)" }}>
+            <span style={{ opacity: 0.6 }}>// 01. about</span>
+            <span style={{ color: "var(--border)" }}>·</span>
+            <span className="px-2 py-0.5 rounded" style={{ background: "rgba(124,106,247,0.08)", border: "1px solid rgba(124,106,247,0.2)" }}>
+              $ cat background.log
+            </span>
+          </div>
+          <h2
+            className="font-display text-4xl md:text-5xl font-bold"
+            style={{ color: "var(--ink)" }}
+          >
+            Mühendislik{" "}
+            <span style={{ color: "var(--violet)" }}>Geçmişi & Yaklaşım</span>
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+          {/* ── Sol: Changelog / Trace ── */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="lg:col-span-6 rounded-xl p-6 md:p-8"
+            style={{
+              background: "var(--bg-surface)",
+              border: "1px solid var(--border)",
+            }}
+          >
+            <div className="flex items-center gap-2 pb-4 mb-6" style={{ borderBottom: "1px solid var(--border)" }}>
+              <FaTerminal size={13} style={{ color: "var(--violet)" }} />
+              <span className="font-mono text-xs uppercase tracking-wider" style={{ color: "var(--ink-secondary)" }}>
+                system_log: academic_and_dev_trace
+              </span>
             </div>
 
-            {/* İstatistikler */}
-            <div className="mt-10 flex gap-12 pt-8 border-t border-slate-800">
-              <div>
-                <h4 className="text-4xl font-bold text-cyan-400 font-mono">
-                  4+
-                </h4>
-                <p className="text-sm text-slate-500 mt-1">Yıl Eğitim</p>
-              </div>
-              <div>
-                <h4 className="text-4xl font-bold text-purple-400 font-mono">
-                  10+
-                </h4>
-                <p className="text-sm text-slate-500 mt-1">Tamamlanan Proje</p>
-              </div>
+            <div className="flex flex-col gap-6 relative">
+              {/* Dikey çizgi */}
+              <div
+                className="absolute left-[39px] top-3 bottom-3 w-px pointer-events-none"
+                style={{ background: "var(--border)" }}
+                aria-hidden="true"
+              />
+
+              {LOG_ENTRIES.map((entry, idx) => (
+                <div key={idx} className="flex items-start gap-4 relative">
+                  {/* Yıl Badge */}
+                  <span
+                    className="font-mono text-xs px-2 py-1 rounded shrink-0 z-10"
+                    style={{
+                      background: entry.active ? "var(--violet)" : "var(--bg-base)",
+                      color: entry.active ? "#fff" : "var(--ink-secondary)",
+                      border: `1px solid ${entry.active ? "var(--violet)" : "var(--border)"}`,
+                      boxShadow: entry.active ? "0 0 12px rgba(124,106,247,0.4)" : "none",
+                    }}
+                  >
+                    {entry.year}
+                  </span>
+
+                  {/* Detay */}
+                  <div className="flex-1 pt-0.5">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h4 className="font-medium text-sm" style={{ color: "var(--ink)" }}>
+                        {entry.title}
+                      </h4>
+                      {entry.active && (
+                        <span
+                          className="font-mono text-[10px] px-1.5 py-0.2 rounded"
+                          style={{
+                            background: "rgba(74,222,128,0.1)",
+                            color: "#4ade80",
+                            border: "1px solid rgba(74,222,128,0.25)",
+                          }}
+                        >
+                          active
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs leading-relaxed" style={{ color: "var(--ink-dim)" }}>
+                      {entry.detail}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
 
-          {/* --- SAĞ TARAF (KARTLAR) --- */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid gap-6"
-          >
-            {cards.map((card, index) => (
+          {/* ── Sağ: Odak Alanları / Mimari Kartları ── */}
+          <div className="lg:col-span-6 flex flex-col gap-4">
+            {FOCUS_AREAS.map((area, idx) => (
               <motion.div
-                key={index}
-                whileHover={{ y: -5 }}
-                className={`p-8 rounded-2xl border ${card.border} ${card.bg} backdrop-blur-sm hover:shadow-lg transition-all group`}
+                key={idx}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                className="p-5 md:p-6 rounded-xl transition-all duration-200"
+                style={{
+                  background: "var(--bg-base)",
+                  border: "1px solid var(--border)",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = "rgba(124,106,247,0.4)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = "var(--border)";
+                }}
               >
-                <div className="flex items-start gap-5">
-                  <div
-                    className={`p-3 rounded-lg bg-slate-900 ${card.color} text-2xl shrink-0`}
-                  >
-                    {card.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                      {card.title}
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-mono text-xs font-bold" style={{ color: "var(--violet)" }}>
+                      [{area.code}]
+                    </span>
+                    <h3 className="font-display text-base font-semibold" style={{ color: "var(--ink)" }}>
+                      {area.name}
                     </h3>
-                    <div className="text-slate-400 text-sm leading-relaxed">
-                      {card.desc}
-                    </div>
                   </div>
+                </div>
+
+                <p className="text-xs leading-relaxed mb-4" style={{ color: "var(--ink-secondary)" }}>
+                  {area.desc}
+                </p>
+
+                {/* Tech tokens */}
+                <div className="flex flex-wrap gap-1.5">
+                  {area.techs.map(t => (
+                    <span
+                      key={t}
+                      className="font-mono text-[11px] px-2 py-0.5 rounded"
+                      style={{
+                        background: "rgba(124,106,247,0.06)",
+                        color: "var(--ink-dim)",
+                        border: "1px solid var(--border)",
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
+
         </div>
       </div>
     </section>

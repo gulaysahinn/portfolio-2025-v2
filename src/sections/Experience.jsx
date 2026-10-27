@@ -1,117 +1,148 @@
-// components/Experience.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import { experience } from "../data/content";
-import { FaCalendarAlt, FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
+import { FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+};
+
+// Log entry ID eşlemeleri
+const TRACE_META = {
+  1: { traceId: "trace://exp_01", status: "active", dateTag: "2026-02 -> present" },
+  2: { traceId: "trace://exp_02", status: "completed", dateTag: "2025-08 -> 2025-09" },
+  3: { traceId: "trace://exp_03", status: "completed", dateTag: "2025-07 -> 2025-08" },
+};
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 bg-slate-950">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Başlık */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Deneyimlerim
+    <section id="experience" className="py-24 md:py-36 scroll-mt-[90px]" style={{ background: "var(--bg-surface)" }}>
+      <div className="max-w-4xl mx-auto px-6">
+
+        {/* ── Section Header — Terminal Tag Pattern ── */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="mb-14"
+        >
+          <div className="flex items-center gap-2 mb-3 font-mono text-xs" style={{ color: "var(--violet)" }}>
+            <span style={{ opacity: 0.6 }}>// 02. experience</span>
+            <span style={{ color: "var(--border)" }}>·</span>
+            <span className="px-2 py-0.5 rounded" style={{ background: "rgba(124,106,247,0.08)", border: "1px solid rgba(124,106,247,0.2)" }}>
+              $ git log --oneline experience/
+            </span>
+          </div>
+          <h2
+            className="font-display text-4xl md:text-5xl font-bold"
+            style={{ color: "var(--ink)" }}
+          >
+            Çalışma &{" "}
+            <span style={{ color: "var(--violet)" }}>Staj Günlüğü</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Yazılım ve teknoloji alanında edindiğim profesyonel deneyimler
-          </p>
-        </div>
+        </motion.div>
 
-        {/* Deneyim Kartları */}
-        <div className="space-y-8">
-          {experience.map((exp, index) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="relative group"
-            >
-              {/* Timeline Çizgisi - Sadece ara bağlantılar için */}
-              {index < experience.length - 1 && (
-                <div className="absolute left-6 top-full h-8 w-0.5 bg-gradient-to-b from-cyan-500 to-purple-500 hidden md:block"></div>
-              )}
+        {/* ── Log Entries ── */}
+        <div className="flex flex-col gap-6">
+          {experience.map((exp, index) => {
+            const meta = TRACE_META[exp.id] || { traceId: `trace://exp_0${index + 1}`, status: "completed", dateTag: exp.date };
+            const isActive = meta.status === "active";
 
-              {/* Ana Kart */}
-              <div className="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10">
-                {/* Kart Üst Kısmı */}
-                <div className="flex flex-col md:flex-row md:items-start justify-between mb-6 gap-4">
-                  <div className="flex-1">
-                    {/* Rol ve Şirket */}
-                    <div className="flex items-start gap-4">
-                      {/* İkon */}
-                      <div className="hidden md:flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 text-white">
-                        <FaBriefcase size={20} />
-                      </div>
-
-                      <div className="flex-1">
-                        <h3 className="text-2xl font-bold text-white mb-2">
-                          {exp.role}
-                        </h3>
-                        <div className="flex flex-wrap items-center gap-3 text-gray-300">
-                          <span className="flex items-center gap-2 font-medium text-cyan-400">
-                            <FaMapMarkerAlt size={14} />
-                            {exp.company}
-                          </span>
-                          <span className="text-gray-500 hidden md:inline">
-                            •
-                          </span>
-                          <span className="flex items-center gap-2 text-gray-400">
-                            <FaCalendarAlt size={14} />
-                            {exp.date}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+            return (
+              <motion.div
+                key={exp.id}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+                className="rounded-xl p-6 md:p-7 transition-all duration-200"
+                style={{
+                  background: "var(--bg-base)",
+                  border: `1px solid ${isActive ? "rgba(124,106,247,0.4)" : "var(--border)"}`,
+                  boxShadow: isActive ? "0 4px 24px -6px rgba(124,106,247,0.15)" : "none",
+                }}
+              >
+                {/* Terminal Header Bar */}
+                <div
+                  className="flex flex-wrap items-center justify-between gap-3 pb-3.5 mb-4 font-mono text-xs"
+                  style={{ borderBottom: "1px solid var(--border)" }}
+                >
+                  <div className="flex items-center gap-2">
+                    <span style={{ color: "var(--violet)" }}>{meta.traceId}</span>
+                    <span style={{ color: "var(--border)" }}>·</span>
+                    <span style={{ color: "var(--ink-dim)" }}>{meta.dateTag}</span>
                   </div>
 
-                  {/* Etiket */}
-                  <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30">
-                    <span className="text-cyan-300 font-medium text-sm">
-                      {index === 0 ? "Son Deneyim" : "Staj"}
+                  {/* Status Indicator */}
+                  <div className="flex items-center gap-1.5">
+                    <span
+                      className="w-1.5 h-1.5 rounded-full inline-block"
+                      style={{
+                        background: isActive ? "#4ade80" : "var(--ink-dim)",
+                        boxShadow: isActive ? "0 0 8px #4ade80" : "none",
+                      }}
+                    />
+                    <span
+                      className="font-mono text-xs"
+                      style={{ color: isActive ? "#4ade80" : "var(--ink-dim)" }}
+                    >
+                      status: {meta.status}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Rol ve Şirket */}
+                <div className="mb-3">
+                  <h3
+                    className="font-display text-lg md:text-xl font-semibold mb-1"
+                    style={{ color: "var(--ink)" }}
+                  >
+                    {exp.role}
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-3 text-xs" style={{ color: "var(--ink-secondary)" }}>
+                    <span className="font-medium" style={{ color: "var(--violet)" }}>
+                      {exp.company}
+                    </span>
+                    <span style={{ color: "var(--border)" }}>·</span>
+                    <span className="flex items-center gap-1" style={{ color: "var(--ink-dim)" }}>
+                      <FaMapMarkerAlt size={11} />
+                      {exp.location}
                     </span>
                   </div>
                 </div>
 
                 {/* Açıklama */}
-                <div className="mb-6">
-                  <p className="text-gray-300 leading-relaxed text-lg">
-                    {exp.description}
-                  </p>
-                </div>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--ink-secondary)" }}>
+                  {exp.description}
+                </p>
 
-                {/* Teknolojiler */}
-                <div className="pt-6 border-t border-slate-700">
-                  <h4 className="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wider">
-                    Kullanılan Teknolojiler
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.technologies?.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1.5 bg-slate-800/70 text-cyan-300 rounded-lg text-sm font-medium hover:bg-slate-700/70 transition-colors"
-                      >
-                        {tech}
-                      </span>
-                    )) || (
-                      <span className="px-3 py-1.5 bg-slate-800/70 text-gray-400 rounded-lg text-sm">
-                        Full-stack Development
-                      </span>
-                    )}
-                  </div>
+                {/* Stack Satırı — Hero ve Proje formatıyla birebir aynı */}
+                <div className="flex flex-wrap items-center gap-2 pt-3" style={{ borderTop: "1px solid var(--border-subtle)" }}>
+                  <span className="font-mono text-xs" style={{ color: "var(--ink-dim)" }}>
+                    stack:
+                  </span>
+                  {exp.technologies.map(tech => (
+                    <span
+                      key={tech}
+                      className="font-mono text-xs px-2.5 py-0.5 rounded"
+                      style={{
+                        background: "rgba(124,106,247,0.06)",
+                        color: "var(--violet)",
+                        border: "1px solid rgba(124,106,247,0.18)",
+                      }}
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-
-                {/* Alt Bilgi */}
-                <div className="mt-6 flex items-center justify-between text-sm text-gray-500">
-                  <span>📍 {exp.location}</span>
-                  <span>⏱️ {exp.duration}</span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
+
       </div>
     </section>
   );

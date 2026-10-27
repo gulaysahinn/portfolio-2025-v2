@@ -1,19 +1,17 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { skills } from "../data/content";
 
-// 1. GEREKLİ İKONLAR (FaBrain EKLENDİ)
 import {
   FaPython,
   FaReact,
   FaJs,
   FaDatabase,
   FaCode,
-  FaBrain, // <-- YENİ: Machine Learning için Beyin ikonu
+  FaBrain,
   FaPhp,
+  FaTerminal,
 } from "react-icons/fa";
-
-// Mevcut Si ikonları (Çalışanlar)
 import {
   SiTypescript,
   SiTailwindcss,
@@ -25,89 +23,182 @@ import {
   SiMysql,
 } from "react-icons/si";
 
+// Tüm ikonlar tek bir curated indigo-violet / teal paletinde
+const skillIconMap = {
+  Python:            <FaPython />,
+  JavaScript:        <FaJs />,
+  "C#":              <FaCode />,
+  PHP:               <FaPhp />,
+  "React.js":        <FaReact />,
+  TypeScript:        <SiTypescript />,
+  "Tailwind CSS":    <SiTailwindcss />,
+  "Next.js":         <FaCode />,
+  Flutter:           <SiFlutter />,
+  "Node.js":         <FaJs />,
+  "Machine Learning":<FaBrain />,
+  TensorFlow:        <SiTensorflow />,
+  Oracle:            <FaDatabase />,
+  MsSQL:             <FaDatabase />,
+  MySQL:             <SiMysql />,
+  MongoDB:           <SiMongodb />,
+  Firebase:          <SiFirebase />,
+  "Git & GitHub":    <SiGithub />,
+};
+
+// Kategori filtreleri
+const FILTERS = [
+  { key: "all",      label: "Tümü",        cmd: "cat *" },
+  { key: "ai",       label: "AI & ML",     cmd: "cat ai/" },
+  { key: "language", label: "Diller",      cmd: "cat lang/" },
+  { key: "frontend", label: "Frontend",    cmd: "cat web/" },
+  { key: "mobile",   label: "Mobil",       cmd: "cat mobile/" },
+  { key: "database", label: "Veritabanı",  cmd: "cat db/" },
+  { key: "tools",    label: "Araçlar",     cmd: "cat tools/" },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16, scale: 0.98 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } },
+};
+
 const TechStack = () => {
-  // İkon Eşleştirme Haritası
-  const skillMap = {
-    // 1. DİLLER
-    Python: { icon: <FaPython />, color: "text-yellow-400" },
-    JavaScript: { icon: <FaJs />, color: "text-yellow-300" },
-    "C#": { icon: <FaCode />, color: "text-purple-500" },
-    PHP: { icon: <FaPhp />, color: "text-indigo-400" },
+  const [active, setActive] = useState("all");
 
-    // 2. FRONTEND & MOBILE
-    "React.js": { icon: <FaReact />, color: "text-cyan-400" },
-    TypeScript: { icon: <SiTypescript />, color: "text-blue-500" },
-    "Tailwind CSS": { icon: <SiTailwindcss />, color: "text-cyan-500" },
-    "Next.js": { icon: <FaCode />, color: "text-white" },
-    Flutter: { icon: <SiFlutter />, color: "text-blue-400" },
-
-    // 3. BACKEND & AI (GÜNCELLENDİ)
-    "Node.js": { icon: <FaJs />, color: "text-green-500" },
-
-    // DEĞİŞİKLİK BURADA:
-    "Machine Learning": { icon: <FaBrain />, color: "text-pink-500" }, // <-- ARTIK BEYİN İKONU VE PEMBE
-    TensorFlow: { icon: <SiTensorflow />, color: "text-orange-400" }, // <-- TENSORFLOW TURUNCU VE KENDİ LOGOSU
-
-    // 4. DATABASE & TOOLS
-    Oracle: { icon: <FaDatabase />, color: "text-red-600" },
-    MsSQL: { icon: <FaDatabase />, color: "text-red-500" },
-    MySQL: { icon: <SiMysql />, color: "text-blue-400" },
-    MongoDB: { icon: <SiMongodb />, color: "text-green-500" },
-    Firebase: { icon: <SiFirebase />, color: "text-yellow-500" },
-    "Git & GitHub": { icon: <SiGithub />, color: "text-white" },
-  };
+  const filtered = active === "all"
+    ? skills
+    : skills.filter(s => s.category === active);
 
   return (
-    <section id="techstack" className="py-20 scroll-mt-[90px]">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Başlık Alanı */}
+    <section id="techstack" className="py-24 md:py-36 scroll-mt-[90px]">
+      <div className="max-w-5xl mx-auto px-6">
+
+        {/* ── Section Header — Terminal Tag Pattern ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.55 }}
+          className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Teknoloji <span className="text-cyan-400">Yeteneklerim</span>
+          <div className="flex items-center gap-2 mb-3 font-mono text-xs" style={{ color: "var(--violet)" }}>
+            <span style={{ opacity: 0.6 }}>// 03. stack</span>
+            <span style={{ color: "var(--border)" }}>·</span>
+            <span className="px-2 py-0.5 rounded" style={{ background: "rgba(124,106,247,0.08)", border: "1px solid rgba(124,106,247,0.2)" }}>
+              $ ls -la tech_stack/
+            </span>
+          </div>
+          <h2
+            className="font-display text-4xl md:text-5xl font-bold"
+            style={{ color: "var(--ink)" }}
+          >
+            Teknoloji{" "}
+            <span style={{ color: "var(--violet)" }}>Yığınım</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            Projelerimde aktif olarak kullandığım diller, kütüphaneler ve
-            araçlar.
-          </p>
         </motion.div>
 
-        {/* Grid Alanı */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          {skills.map((skill, index) => {
-            // Eğer haritada yoksa varsayılan ikon ata
-            const currentSkill = skillMap[skill.name] || {
-              icon: <FaCode />,
-              color: "text-gray-400",
-            };
-
+        {/* ── Filtre Butonları (Terminal Segment) ── */}
+        <div className="flex flex-wrap gap-2 mb-10 pb-4" style={{ borderBottom: "1px solid var(--border)" }}>
+          {FILTERS.map(f => {
+            const isSelected = active === f.key;
             return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -5, scale: 1.05 }}
-                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-xl flex flex-col items-center justify-center gap-4 hover:border-cyan-400/30 hover:shadow-[0_0_20px_-5px_rgba(6,182,212,0.3)] transition-all group"
+              <button
+                key={f.key}
+                onClick={() => setActive(f.key)}
+                className="font-mono text-xs px-3.5 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-1.5"
+                style={{
+                  background: isSelected ? "var(--violet)" : "var(--bg-surface)",
+                  color: isSelected ? "#fff" : "var(--ink-secondary)",
+                  border: `1px solid ${isSelected ? "var(--violet)" : "var(--border)"}`,
+                }}
               >
-                <div
-                  className={`text-4xl md:text-5xl ${currentSkill.color} drop-shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                >
-                  {currentSkill.icon}
-                </div>
-
-                <h3 className="text-slate-300 font-medium text-sm group-hover:text-white transition-colors text-center">
-                  {skill.name}
-                </h3>
-              </motion.div>
+                <span>{f.label}</span>
+                <span className="text-[10px]" style={{ opacity: isSelected ? 0.8 : 0.4 }}>
+                  ({f.key === "all" ? skills.length : skills.filter(s => s.category === f.key).length})
+                </span>
+              </button>
             );
           })}
         </div>
+
+        {/* ── Skill Matrix Grid ── */}
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
+          <AnimatePresence mode="popLayout">
+            {filtered.map(skill => {
+              const isAdv = skill.level === "Advanced";
+
+              return (
+                <motion.div
+                  key={skill.name}
+                  layout
+                  variants={fadeUp}
+                  initial="hidden"
+                  animate="show"
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="p-4 rounded-xl transition-all duration-200 flex flex-col justify-between"
+                  style={{
+                    background: "var(--bg-base)",
+                    border: "1px solid var(--border)",
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = "rgba(124,106,247,0.4)";
+                    e.currentTarget.style.background = "var(--bg-surface)";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = "var(--border)";
+                    e.currentTarget.style.background = "var(--bg-base)";
+                  }}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    {/* Unified Icon — Tek tip, uyumlu violet/ink tonlarında */}
+                    <div
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0"
+                      style={{
+                        background: "rgba(124,106,247,0.08)",
+                        color: isAdv ? "var(--violet)" : "#a998ff",
+                        border: "1px solid rgba(124,106,247,0.18)",
+                      }}
+                    >
+                      {skillIconMap[skill.name] || <FaCode />}
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-medium text-sm truncate" style={{ color: "var(--ink)" }}>
+                        {skill.name}
+                      </h3>
+                      <span className="font-mono text-[11px]" style={{ color: "var(--ink-dim)" }}>
+                        {skill.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Alt Seviye Çubuğu — Makine/Terminal Göstergesi */}
+                  <div className="pt-2 flex items-center justify-between" style={{ borderTop: "1px solid var(--border-subtle)" }}>
+                    <span className="font-mono text-[11px]" style={{ color: isAdv ? "#22d3ee" : "var(--ink-dim)" }}>
+                      {skill.level}
+                    </span>
+                    <div className="flex gap-1">
+                      {[0, 1, 2, 3].map(barIdx => {
+                        const filled = isAdv ? true : barIdx < 2;
+                        return (
+                          <span
+                            key={barIdx}
+                            className="w-2.5 h-1 rounded-full"
+                            style={{
+                              background: filled
+                                ? isAdv ? "#22d3ee" : "var(--violet)"
+                                : "rgba(255,255,255,0.08)",
+                            }}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
+
       </div>
     </section>
   );
